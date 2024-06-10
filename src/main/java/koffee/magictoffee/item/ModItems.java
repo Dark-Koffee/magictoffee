@@ -23,7 +23,5 @@ public class ModItems {
 
     public static void registerModItems() {
         MagicToffee.LOGGER.info("Registering Mod Items For Magic Toffee");
-
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientItemGroup);
     }
 }
