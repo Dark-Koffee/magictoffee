@@ -11,11 +11,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    public static final Item wand = registerItem("wand", new Item(new FabricItemSettings()));
-
-    private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
-        entries.add(wand);
-    }
+    public static final Item wand = registerItem("wand", new Item(new FabricItemSettings().maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(MagicToffee.MOD_ID, name), item);
@@ -23,7 +19,5 @@ public class ModItems {
 
     public static void registerModItems() {
         MagicToffee.LOGGER.info("Registering Mod Items For Magic Toffee");
-
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientItemGroup);
     }
 }
