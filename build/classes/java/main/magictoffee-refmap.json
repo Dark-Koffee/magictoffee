@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "koffee/magictoffee/mixin/ExampleMixin": {
+      "loadWorld": "Lnet/minecraft/server/MinecraftServer;method_3735()V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "koffee/magictoffee/mixin/ExampleMixin": {
+        "loadWorld": "Lnet/minecraft/server/MinecraftServer;method_3735()V"
+      }
+    }
+  }
+}
