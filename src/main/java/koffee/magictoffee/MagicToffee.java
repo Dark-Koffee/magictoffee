@@ -1,5 +1,7 @@
 package koffee.magictoffee;
 
+import koffee.magictoffee.enchantments.FrostbiteEnchantment;
+import koffee.magictoffee.enchantments.ModEnchantments;
 import koffee.magictoffee.item.ModItemGroups;
 import koffee.magictoffee.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -22,5 +24,6 @@ public class MagicToffee implements ModInitializer {
 		// Proceed with mild caution.
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
+		ModEnchantments.registerModEnchantments();
 	}
 }
