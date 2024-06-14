@@ -1,5 +1,7 @@
 {
     "item.magictoffee.wand": "Wand",
 
-    "itemgroup.magictoffee": "Magic Toffee"
+    "itemgroup.magictoffee": "Magic Toffee",
+
+    "enchantment.magictoffee.frostbite": "Frostbite"
 }
