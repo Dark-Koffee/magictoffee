@@ -61,4 +61,5 @@ public class SpellcasterBlock extends BlockWithEntity implements BlockEntityProv
         return validateTicker(type, ModBlockEntities.SPELLCASTER_BLOCK_ENTITY_BLOCK_ENTITY,
                 (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
+    
 }
