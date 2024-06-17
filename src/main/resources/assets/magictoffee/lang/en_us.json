@@ -1,6 +1,10 @@
 {
     "item.magictoffee.wand": "Wand",
 
+    "block.magictoffee.spellcaster": "Spellcaster",
+
+    "block.magictoffee.tempblock": "Tempblock",
+
     "itemgroup.magictoffee": "Magic Toffee",
 
     "enchantment.magictoffee.frostbite": "Frostbite"
