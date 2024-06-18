@@ -4,8 +4,10 @@ import koffee.magictoffee.block.ModBlocks;
 import koffee.magictoffee.block.entity.ModBlockEntities;
 import koffee.magictoffee.enchantments.FrostbiteEnchantment;
 import koffee.magictoffee.enchantments.ModEnchantments;
+import koffee.magictoffee.event.WandAttackHandler;
 import koffee.magictoffee.item.ModItemGroups;
 import koffee.magictoffee.item.ModItems;
+import koffee.magictoffee.networking.ModMessages;
 import koffee.magictoffee.spells.ModSpells;
 import koffee.magictoffee.spells.SpellRegisterer;
 import net.fabricmc.api.ModInitializer;
@@ -36,7 +38,14 @@ public class MagicToffee implements ModInitializer {
 		// Spells
 		ModSpells.registerModSpells();
 
+		// Wand Handlers
+		WandAttackHandler.register();
+
+		// Networking
+		ModMessages.registerC2SPackets();
+
 		// Enchantments
 		ModEnchantments.registerModEnchantments();
+
 	}
 }

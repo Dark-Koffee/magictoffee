@@ -2,12 +2,20 @@
   "mappings": {
     "koffee/magictoffee/mixin/ExampleMixin": {
       "loadWorld": "Lnet/minecraft/server/MinecraftServer;method_3735()V"
+    },
+    "koffee/magictoffee/mixin/ModEntityDataSaverMixin": {
+      "readNbt": "Lnet/minecraft/class_1297;method_5651(Lnet/minecraft/class_2487;)V",
+      "writeNbt": "Lnet/minecraft/class_1297;method_5647(Lnet/minecraft/class_2487;)Lnet/minecraft/class_2487;"
     }
   },
   "data": {
     "named:intermediary": {
       "koffee/magictoffee/mixin/ExampleMixin": {
         "loadWorld": "Lnet/minecraft/server/MinecraftServer;method_3735()V"
+      },
+      "koffee/magictoffee/mixin/ModEntityDataSaverMixin": {
+        "readNbt": "Lnet/minecraft/class_1297;method_5651(Lnet/minecraft/class_2487;)V",
+        "writeNbt": "Lnet/minecraft/class_1297;method_5647(Lnet/minecraft/class_2487;)Lnet/minecraft/class_2487;"
       }
     }
   }
