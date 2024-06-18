@@ -9,7 +9,6 @@ import net.minecraft.util.Hand;
 import koffee.magictoffee.item.custom.WandItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 
 public class WandAttackHandler {
 
@@ -39,6 +38,7 @@ public class WandAttackHandler {
         });
     }
 
+    // Checks if the player has the wand in their hand.
     private static boolean isWandInHand(PlayerEntity player, Hand hand) {
         return player.getStackInHand(hand).getItem() instanceof WandItem;
     }
