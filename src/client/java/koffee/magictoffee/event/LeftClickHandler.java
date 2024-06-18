@@ -38,8 +38,6 @@ public class LeftClickHandler {
         ClientPlayerEntity player = client.player;
         assert player != null;
         if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof WandItem) {
-            player.sendMessage(Text.literal("You left clicked wand"), true);
-
             ClientPlayNetworking.send(ModMessages.CHANGE_SPELL, PacketByteBufs.create());
         }
     }
