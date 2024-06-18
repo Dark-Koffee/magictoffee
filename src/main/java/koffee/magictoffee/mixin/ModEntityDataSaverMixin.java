@@ -11,27 +11,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class ModEntityDataSaverMixin implements IEntityDataSaver {
-    private NbtCompound persistantData;
+    private NbtCompound persistentData;
 
     @Override
-    public NbtCompound getPersistantData() {
-        if(this.persistantData == null) {
-            this.persistantData = new NbtCompound();
+    public NbtCompound getPersistentData() {
+        if(this.persistentData == null) {
+            this.persistentData = new NbtCompound();
         }
-        return persistantData;
+        return persistentData;
     }
 
     @Inject(method = "writeNbt", at = @At("HEAD"))
     protected void injectWriteMethod(NbtCompound nbt, CallbackInfoReturnable info) {
-        if(persistantData != null) {
-            nbt.put("magictoffee.spells.1", persistantData);
+        if(persistentData != null) {
+            nbt.put("magictoffee.spells.1", persistentData);
         }
     }
 
     @Inject(method = "readNbt", at = @At("HEAD"))
     protected void injectReadMethod(NbtCompound nbt, CallbackInfo info) {
         if (nbt.contains("magictoffee.spells.1", 10)) {
-            persistantData = nbt.getCompound("magictoffee.spells.1");
+            persistentData = nbt.getCompound("magictoffee.spells.1");
         }
     }
 }
