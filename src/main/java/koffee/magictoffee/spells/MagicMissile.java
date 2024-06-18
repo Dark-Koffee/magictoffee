@@ -8,6 +8,7 @@ public class MagicMissile extends Spell {
 
     MagicMissile() {
         super.spellID = "magictoffee:magicmissile";
+        super.displayName = "Magic Missile";
     }
 
     @Override
