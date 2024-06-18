@@ -13,6 +13,15 @@ import net.minecraft.util.TypedActionResult;
 public class WandAttackHandler {
 
     public static void register() {
+        // When the player right clicks with a wand
+        UseItemCallback.EVENT.register((player, world, hand) -> {
+            if (isWandInHand(player, hand)) {
+                // Handles casting spells with the wand
+                player.sendMessage(Text.literal("Cast spell"), true);
+                return TypedActionResult.success(player.getStackInHand(hand));
+            }
+            return TypedActionResult.pass(player.getStackInHand(hand));
+        });
         // Cancel Hitting a block
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
             if (isWandInHand(player, hand)) {
@@ -27,14 +36,6 @@ public class WandAttackHandler {
                 return ActionResult.SUCCESS;
             }
             return ActionResult.PASS;
-        });
-        UseItemCallback.EVENT.register((player, world, hand) -> {
-            if (isWandInHand(player, hand)) {
-                // Handles casting spells with the wand
-                player.sendMessage(Text.literal("You right clicked with the wand"), true);
-                return TypedActionResult.success(player.getStackInHand(hand));
-            }
-            return TypedActionResult.pass(player.getStackInHand(hand));
         });
     }
 
