@@ -1,6 +1,7 @@
 package koffee.magictoffee.item;
 
 import koffee.magictoffee.MagicToffee;
+import koffee.magictoffee.item.custom.WandItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -11,7 +12,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    public static final Item wand = registerItem("wand", new Item(new FabricItemSettings().maxCount(1)));
+    public static final Item wand = registerItem("wand", new WandItem(new FabricItemSettings().maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(MagicToffee.MOD_ID, name), item);
