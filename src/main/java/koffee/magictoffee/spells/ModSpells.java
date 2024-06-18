@@ -1,14 +1,13 @@
 package koffee.magictoffee.spells;
 
 import koffee.magictoffee.MagicToffee;
-import net.minecraft.block.Block;
 
 public class ModSpells {
 
     // TestSpell
     public static final Spell testSpell = registerSpell(new TestSpell());
     // SecondSpell
-    public static final Spell secondSpell = registerSpell(new SecondSpell());
+    public static final Spell secondSpell = registerSpell(new MagicMissile());
 
     private static Spell registerSpell(Spell spell) {
         return new SpellRegisterer().register(spell);

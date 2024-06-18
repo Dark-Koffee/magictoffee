@@ -4,10 +4,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 
-public class TestSpell extends Spell {
+public class MagicMissile extends Spell {
 
-    TestSpell() {
-        super.spellID = "test";
+    MagicMissile() {
+        super.spellID = "magictoffee:magicmissile";
     }
 
     @Override

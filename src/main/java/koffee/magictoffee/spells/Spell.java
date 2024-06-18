@@ -4,8 +4,9 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public abstract class Spell {
     // -- Spell Class Fields --
-    protected String spellName;
+    protected String spellID;
     protected String spellType;
+    protected String displayName;
     protected int cooldown;
     protected int manaCost;
 
@@ -13,16 +14,18 @@ public abstract class Spell {
 
     // Default Constructor
     public Spell() {
-        this.spellName = "<none>";
-        this.spellType = "<none>";
+        this.spellID = "magictoffee:none";
+        this.spellType = "Basic";
+        this.displayName = "Unknown";
         this.cooldown = 0;
         this.manaCost = 0;
     }
 
     // Overloaded Constructor
-    public Spell(String name, String type, int cooldown, int cost) {
-        this.spellName = name;
+    public Spell(String id, String type, String display, int cooldown, int cost) {
+        this.spellID = id;
         this.spellType = type;
+        this.displayName = display;
         this.cooldown = cooldown;
         this.manaCost = cost;
     }
@@ -34,28 +37,24 @@ public abstract class Spell {
     public abstract void ActionOnUse(PlayerEntity user);
 
     // Getters and Setters for Spell
-    public String getName() {
-        return this.spellName;
+    public String getID() {
+        return this.spellID;
+    }
+
+    public String getDisplayName() {
+        return this.displayName;
     }
 
     public String getSpellType() {
         return this.spellType;
     }
 
+    public int getCooldown() {
+        return this.cooldown;
+    }
+
     public int getManaCost() {
         return this.manaCost;
-    }
-
-    public void setName(String name) {
-        this.spellName = name;
-    }
-
-    public void setSpellType(String type) {
-        this.spellType = type;
-    }
-
-    public void setManaCost(int cost) {
-        this.manaCost = cost;
     }
 
 }
