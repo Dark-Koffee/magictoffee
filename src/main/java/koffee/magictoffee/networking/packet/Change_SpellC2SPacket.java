@@ -14,7 +14,7 @@ public class Change_SpellC2SPacket {
                                PacketByteBuf buf, PacketSender responseSender) {
         // This is called when a packet is received by the server from the client
         if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof WandItem) {
-            player.sendMessage(Text.literal("Server spell cast"), false);
+            player.sendMessage(Text.literal("Change Spell"), false);
         }
     }
 }
