@@ -7,6 +7,7 @@ import koffee.magictoffee.enchantments.ModEnchantments;
 import koffee.magictoffee.item.ModItemGroups;
 import koffee.magictoffee.item.ModItems;
 import koffee.magictoffee.spells.ModSpells;
+import koffee.magictoffee.spells.SpellRegisterer;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;

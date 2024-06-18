@@ -1,24 +1,17 @@
 package koffee.magictoffee.spells;
 
 import koffee.magictoffee.MagicToffee;
-import koffee.magictoffee.block.SpellcasterBlock;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 
 public class ModSpells {
 
     // TestSpell
-    public static final TestSpell testSpell = new TestSpell();
+    public static final Spell testSpell = registerSpell(new TestSpell());
+    // SecondSpell
+    public static final Spell secondSpell = registerSpell(new SecondSpell());
 
-    private static Spell registerSpell(String name, Block block) {
-        RegisterSpells
+    private static Spell registerSpell(Spell spell) {
+        return new SpellRegisterer().register(spell);
     }
 
     public static void registerModSpells() {

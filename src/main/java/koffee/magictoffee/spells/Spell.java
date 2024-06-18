@@ -15,6 +15,7 @@ public abstract class Spell {
     public Spell() {
         this.spellName = "<none>";
         this.spellType = "<none>";
+        this.cooldown = 0;
         this.manaCost = 0;
     }
 
