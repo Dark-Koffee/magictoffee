@@ -20,7 +20,6 @@ public class ModItemGroups {
                         entries.add(ModItems.wand);
 
                         // Blocks
-                        entries.add(ModBlocks.tempblock);
 
                         // Spellcaster
                         entries.add(ModBlocks.spellcaster);
