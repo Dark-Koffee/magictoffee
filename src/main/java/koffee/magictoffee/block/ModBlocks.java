@@ -13,9 +13,6 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
 
-    // Tempblock
-    public static final Block tempblock = registerBlock("tempblock",
-            new Block(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE)));
     // Spellcaster
     public static final Block spellcaster = registerBlock("spellcaster",
             new SpellcasterBlock(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE)
