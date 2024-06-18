@@ -92,5 +92,6 @@ public class SpellcasterBlockEntity extends BlockEntity implements ExtendedScree
 
     public void tick(World world, BlockPos pos, BlockState state) {
         if(world.isClient());
+            return;
     }
 }

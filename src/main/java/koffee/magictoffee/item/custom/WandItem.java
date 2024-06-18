@@ -1,5 +1,6 @@
 package koffee.magictoffee.item.custom;
 
+import koffee.magictoffee.spells.RegisterSpells;
 import koffee.magictoffee.spells.Spell;
 import koffee.magictoffee.spells.TestSpell;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,4 +24,7 @@ public class WandItem extends Item {
         testSpell.ActionOnUse(user);
         return TypedActionResult.success(user.getStackInHand(hand));
     }
+
+    // Gets all the fancy little spells :)
+    public RegisterSpells registerSpells = new RegisterSpells();
 }
