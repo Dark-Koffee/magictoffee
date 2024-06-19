@@ -15,7 +15,7 @@ public class ModBlocks {
 
     // Spellcaster
     public static final Block spellcaster = registerBlock("spellcaster",
-            new SpellcasterBlock(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE)
+            new SpellcasterBlock(FabricBlockSettings.copyOf(Blocks.ENCHANTING_TABLE).luminance(0)
                     .nonOpaque()));
 
     private static Block registerBlock(String name, Block block) {
