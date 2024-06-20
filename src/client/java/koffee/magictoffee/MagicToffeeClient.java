@@ -16,7 +16,6 @@ public class MagicToffeeClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.spellcaster, RenderLayer.getCutout());
 
 		LeftClickHandler.register();
-		ModMessages.registerS2CPackets();
 		HudRenderCallback.EVENT.register(new SpellsListHud());
 	}
 }
