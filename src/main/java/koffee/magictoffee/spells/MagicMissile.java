@@ -1,22 +1,95 @@
 package koffee.magictoffee.spells;
 
+import koffee.magictoffee.util.Particles;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.text.Text;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 public class MagicMissile extends Spell {
 
-    MagicMissile() {
+    public MagicMissile() {
         super.spellID = "magictoffee:magicmissile";
         super.displayName = "Magic Missile";
     }
 
     @Override
-    public void ActionOnUse(PlayerEntity user){
-        user.sendMessage(Text.literal("-- Spells --"), false);
-        user.playSound(SoundEvents.BLOCK_AMETHYST_CLUSTER_BREAK, 2.0F, 1.0F);
-        for(int i = 0; i < SpellRegisterer.spells.size(); i++) {
-            user.sendMessage(Text.of(SpellRegisterer.spells.get(i).getID()), false);
+    public void ActionOnUse(PlayerEntity player){
+        Vec3d eyePos = player.getEyePos();
+        Vec3d closestTarget = getClosest(player);
+        World world = player.getWorld();
+        if (closestTarget != null) {
+            Particles.drawLine(world, eyePos, closestTarget, 30, ParticleTypes.INSTANT_EFFECT);
+            if (getTargetEntity(player) != null){
+                LivingEntity targetEntity = (LivingEntity) getTargetEntity(player);
+                player.sendMessage(Text.of(targetEntity.toString()));
+                targetEntity.addVelocity(0, 5, 0);
+            }
+            else {
+                player.sendMessage(Text.of("You are not looking at an entity"));
+            }
+        }
+        else {
+            Particles.drawCircle(world, eyePos, 0.75, 0, 0, 24, ParticleTypes.INSTANT_EFFECT);
+        }
+    }
+
+    // Gets the position of the entity the player is looking at
+    private Entity getTargetEntity(PlayerEntity player) {
+        // Get the player's eye position
+        Vec3d playerEyePos = player.getEyePos();
+        // Get the player's view direction
+        Vec3d playerLookVec = player.getRotationVec(1.0F);
+
+        // Extend the raycast range, if needed
+        double raycastRange = 20.0D; // Example range
+        // Perform raycast
+        HitResult hitResult = player.raycast(raycastRange, 1.0F, false);
+
+        if (hitResult.getType() == HitResult.Type.ENTITY) {
+            EntityHitResult entityHitResult = (EntityHitResult) hitResult;
+            return entityHitResult.getEntity();
+        }
+
+        return null;
+    }
+
+    private Vec3d getTargetBlock(PlayerEntity player) {
+        HitResult hitResult = player.raycast(20.0D, 0.0F, false);
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            BlockHitResult targetBlock = (BlockHitResult) hitResult;
+            return targetBlock.getPos();
+        }
+        else {
+            return null;
+        }
+    }
+
+    // Gets the position of the closest target
+    private Vec3d getClosest(PlayerEntity player) {
+        Entity entity = getTargetEntity(player);
+        Vec3d blockPos = getTargetBlock(player);
+        Vec3d eyePos = player.getEyePos();
+
+        if (entity != null && blockPos != null) {
+            if (eyePos.distanceTo(entity.getPos()) > eyePos.distanceTo(blockPos)) {
+                return entity.getPos();
+            } else {
+                return blockPos;
+            }
+        }
+        else if (entity != null) {
+            player.sendMessage(Text.of("returned entity position"));
+            return entity.getPos();
+        }
+        else {
+            return blockPos;
         }
     }
 
