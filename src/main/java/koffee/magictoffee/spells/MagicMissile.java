@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -26,14 +27,14 @@ public class MagicMissile extends Spell {
         Entity entity = getTargetEntity(player);
         World world = player.getWorld();
         if (entity != null) {
-            Particles.drawLine(world, eyePos, entity.getEyePos(), 30, ParticleTypes.INSTANT_EFFECT);
+            Particles.drawLine((ServerWorld) world, eyePos, entity.getEyePos(), 30, ParticleTypes.INSTANT_EFFECT, 0);
             LivingEntity targetEntity = (LivingEntity) getTargetEntity(player);
             player.sendMessage(Text.of(targetEntity.toString()));
             targetEntity.addVelocity(0, 5, 0);
 
         }
         else {
-            Particles.drawCircle(world, eyePos, 0.75, 0, 0, 24, ParticleTypes.INSTANT_EFFECT);
+            Particles.drawCircle(((ServerWorld) world), eyePos, 0.75, 0, 0, 24, ParticleTypes.INSTANT_EFFECT, 0.0);
         }
     }
 
