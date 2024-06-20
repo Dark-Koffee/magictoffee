@@ -8,6 +8,7 @@ public class TestSpell extends Spell {
 
     TestSpell() {
         super.spellID = "magictoffee:test";
+        super.displayName = "Test Spell";
     }
 
     @Override
