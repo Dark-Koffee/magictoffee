@@ -1,4 +1,6 @@
 package koffee.magictoffee.util;
+import koffee.magictoffee.spells.ModSpells;
+import koffee.magictoffee.spells.Spell;
 import koffee.magictoffee.spells.SpellRegisterer;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -86,5 +88,14 @@ public class SpellData {
             }
         }
         return "Invalid Spell";
+    }
+
+    public static Spell getSpellFromID(String spellID) {
+        for (Spell spell : SpellRegisterer.spells) {
+            if (spell.getDisplayName() == spellID) {
+                return spell;
+            }
+        }
+        return ModSpells.emptySpell;
     }
 }
