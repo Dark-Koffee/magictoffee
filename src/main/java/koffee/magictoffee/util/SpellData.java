@@ -1,5 +1,4 @@
 package koffee.magictoffee.util;
-
 import koffee.magictoffee.spells.SpellRegisterer;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -82,7 +81,7 @@ public class SpellData {
 
     public static String getSpellName(String spellID) {
         for (int i = 0; i < SpellRegisterer.spells.size(); i++) {
-            if (SpellRegisterer.spells.get(i).getID() == spellID) {
+            if (SpellRegisterer.spells.get(i).getID().equals(spellID)) {
                 return SpellRegisterer.spells.get(i).getDisplayName();
             }
         }
