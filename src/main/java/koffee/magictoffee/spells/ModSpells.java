@@ -3,13 +3,13 @@ import koffee.magictoffee.MagicToffee;
 
 public class ModSpells {
 
-    // TestSpell
+    // Test Spell
     public static final Spell testSpell = registerSpell(new TestSpell());
     // Empty Spell
     public static final Spell emptySpell = registerSpell(new EmptySpell());
     // Magic Missile
     public static final Spell magicMissile = registerSpell(new MagicMissile());
-    // Push
+    // Push Spell
     public static final Spell pushSpell = registerSpell((new PushSpell()));
 
     private static Spell registerSpell(Spell spell) {
