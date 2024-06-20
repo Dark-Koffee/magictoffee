@@ -7,8 +7,10 @@ public class ModSpells {
     public static final Spell testSpell = registerSpell(new TestSpell());
     // Empty Spell
     public static final Spell emptySpell = registerSpell(new EmptySpell());
-    // SecondSpell
+    // Magic Missile
     public static final Spell magicMissile = registerSpell(new MagicMissile());
+    // Push
+    public static final Spell pushSpell = registerSpell((new PushSpell()));
 
     private static Spell registerSpell(Spell spell) {
         return new SpellRegisterer().register(spell);
