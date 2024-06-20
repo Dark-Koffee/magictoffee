@@ -7,7 +7,7 @@ import net.minecraft.text.Text;
 public class TestSpell extends Spell {
 
     TestSpell() {
-        super.spellID = "test";
+        super.spellID = "magictoffee:test";
     }
 
     @Override
