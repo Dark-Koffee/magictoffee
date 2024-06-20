@@ -91,9 +91,9 @@ public class SpellData {
     }
 
     public static Spell getSpellFromID(String spellID) {
-        for (Spell spell : SpellRegisterer.spells) {
-            if (spell.getDisplayName() == spellID) {
-                return spell;
+        for (int i = 0; i < SpellRegisterer.spells.size(); i++) {
+            if (SpellRegisterer.spells.get(i).getID().equals(spellID)) {
+                return SpellRegisterer.spells.get(i);
             }
         }
         return ModSpells.emptySpell;
