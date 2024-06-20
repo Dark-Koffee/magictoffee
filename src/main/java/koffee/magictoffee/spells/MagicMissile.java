@@ -23,17 +23,14 @@ public class MagicMissile extends Spell {
     public void ActionOnUse(PlayerEntity player){
         Vec3d eyePos = player.getEyePos();
         Vec3d closestTarget = getClosest(player);
+        Entity entity = getTargetEntity(player);
         World world = player.getWorld();
-        if (closestTarget != null) {
-            Particles.drawLine(world, eyePos, closestTarget, 30, ParticleTypes.INSTANT_EFFECT);
-            if (getTargetEntity(player) != null){
-                LivingEntity targetEntity = (LivingEntity) getTargetEntity(player);
-                player.sendMessage(Text.of(targetEntity.toString()));
-                targetEntity.addVelocity(0, 5, 0);
-            }
-            else {
-                player.sendMessage(Text.of("You are not looking at an entity"));
-            }
+        if (entity != null) {
+            Particles.drawLine(world, eyePos, entity.getEyePos(), 30, ParticleTypes.INSTANT_EFFECT);
+            LivingEntity targetEntity = (LivingEntity) getTargetEntity(player);
+            player.sendMessage(Text.of(targetEntity.toString()));
+            targetEntity.addVelocity(0, 5, 0);
+
         }
         else {
             Particles.drawCircle(world, eyePos, 0.75, 0, 0, 24, ParticleTypes.INSTANT_EFFECT);
@@ -42,14 +39,12 @@ public class MagicMissile extends Spell {
 
     // Gets the position of the entity the player is looking at
     private Entity getTargetEntity(PlayerEntity player) {
-        // Get the player's eye position
+        // Gets the player's eye position
         Vec3d playerEyePos = player.getEyePos();
-        // Get the player's view direction
+        // Gets the player's view direction
         Vec3d playerLookVec = player.getRotationVec(1.0F);
 
-        // Extend the raycast range, if needed
-        double raycastRange = 20.0D; // Example range
-        // Perform raycast
+        double raycastRange = 20.0D;
         HitResult hitResult = player.raycast(raycastRange, 1.0F, false);
 
         if (hitResult.getType() == HitResult.Type.ENTITY) {
