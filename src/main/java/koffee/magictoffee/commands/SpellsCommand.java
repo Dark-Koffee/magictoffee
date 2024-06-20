@@ -7,6 +7,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
+import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
 import koffee.magictoffee.spells.SpellRegisterer;
 import koffee.magictoffee.util.IEntityDataSaver;
 import koffee.magictoffee.util.SpellData;
@@ -67,6 +68,7 @@ public class SpellsCommand {
         String spell = StringArgumentType.getString(context, "spell");
         if (isValidSpell(spell)) {
             SpellData.setSpell((IEntityDataSaver) player, slot-1, spell);
+            Spell_ListS2CPacket.send(player);
             executor.sendMessage(Text.literal("\u00A7dSpell slot " + slot + " for \u00A75" + player.getEntityName() + "\u00A7d set to \u00A76" + spell));
             return 1;
         } else {
