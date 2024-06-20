@@ -2,6 +2,7 @@ package koffee.magictoffee;
 
 import koffee.magictoffee.block.ModBlocks;
 import koffee.magictoffee.block.entity.ModBlockEntities;
+import koffee.magictoffee.commands.SpellsCommand;
 import koffee.magictoffee.enchantments.ModEnchantments;
 import koffee.magictoffee.event.WandAttackHandler;
 import koffee.magictoffee.item.ModItemGroups;
@@ -10,6 +11,7 @@ import koffee.magictoffee.networking.ModMessages;
 import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
 import koffee.magictoffee.spells.ModSpells;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,5 +54,8 @@ public class MagicToffee implements ModInitializer {
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			Spell_ListS2CPacket.send(handler.getPlayer());
 		});
+
+		// Commands
+		CommandRegistrationCallback.EVENT.register(SpellsCommand::register);
 	}
 }
