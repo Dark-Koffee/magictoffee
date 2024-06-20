@@ -1,6 +1,7 @@
 package koffee.magictoffee.spells;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 
 public abstract class Spell {
     // -- Spell Class Fields --
@@ -34,7 +35,7 @@ public abstract class Spell {
 
     // ActionOnUse has to be overloaded
     // What the spell does on use
-    public abstract void ActionOnUse(PlayerEntity user);
+    public abstract void ActionOnUse(PlayerEntity player);
 
     // Getters and Setters for Spell
     public String getID() {
