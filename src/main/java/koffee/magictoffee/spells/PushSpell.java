@@ -8,7 +8,7 @@ import net.minecraft.util.math.Vec3d;
 public class PushSpell extends Spell{
 
     public PushSpell() {
-        super.spellID = "magictofee:push";
+        super.spellID = "magictoffee:push";
         super.displayName = "Push";
     }
 
