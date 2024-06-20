@@ -17,12 +17,15 @@ public class WandAttackHandler {
     public static void register() {
         // When the player right clicks with a wand
         UseItemCallback.EVENT.register((player, world, hand) -> {
-            if (isWandInHand(player, hand)) {
-                // Handles casting spells with the wand
-                player.sendMessage(Text.literal("Cast spell"), true);
-                Spell spell = SpellData.getSpellFromID(SpellData.getSpell((IEntityDataSaver) player, SpellData.getSelected((IEntityDataSaver) player)));
-                spell.ActionOnUse(player);
-                return TypedActionResult.success(player.getStackInHand(hand));
+            // Running on server
+            if (!world.isClient) {
+                if (isWandInHand(player, hand)) {
+                    // Handles casting spells with the wand
+//                    player.sendMessage(Text.literal("Cast spell"), true);
+                    Spell spell = SpellData.getSpellFromID(SpellData.getSpell((IEntityDataSaver) player, SpellData.getSelected((IEntityDataSaver) player)));
+                    spell.ActionOnUse(player);
+                    return TypedActionResult.success(player.getStackInHand(hand));
+                }
             }
             return TypedActionResult.pass(player.getStackInHand(hand));
         });
