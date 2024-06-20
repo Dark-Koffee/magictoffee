@@ -1,6 +1,10 @@
 package koffee.magictoffee.spells;
 
+import koffee.magictoffee.util.Particles;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -19,17 +23,29 @@ public class PushSpell extends Spell{
         Vec3d playerPos = player.getEyePos();
 
         if (targetBlock != null) {
+            // Get vector between player and block
             Vec3d vector = playerPos.subtract(targetBlock);
+
+            // Get vector to push player with
             Vec3d desiredVector = (vector.normalize()).multiply(1.5D);
+
+            // Get location to draw particles at
+            Vec3d offset = vector.normalize().multiply(0.75);
+            Vec3d particlePos = targetBlock.add(offset);
 
             // Using addVelocity for additive effect
             player.addVelocity(desiredVector);
-            player.playSound(SoundEvents.ENTITY_EVOKER_CAST_SPELL, 1.0F, 2.0F);
+
+            // Play woosh sound for the player
+            player.playSound(SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.AMBIENT, 1.0F, 2.0F);
+
+            // Draw the circle
+            Particles.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0);
 
             // Update on the client
             player.velocityModified = true;
         } else {
-            player.playSound(SoundEvents.ENCHANT_THORNS_HIT, 1.0F, 1.0F);
+            player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
         }
     }
 
