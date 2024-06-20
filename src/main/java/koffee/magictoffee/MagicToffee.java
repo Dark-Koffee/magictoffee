@@ -7,8 +7,10 @@ import koffee.magictoffee.event.WandAttackHandler;
 import koffee.magictoffee.item.ModItemGroups;
 import koffee.magictoffee.item.ModItems;
 import koffee.magictoffee.networking.ModMessages;
+import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
 import koffee.magictoffee.spells.ModSpells;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +27,8 @@ public class MagicToffee implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+
+		// Items and Item Groups
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
 
@@ -44,5 +48,9 @@ public class MagicToffee implements ModInitializer {
 		// Enchantments
 		ModEnchantments.registerModEnchantments();
 
+		// Register the event listener for player join
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+			Spell_ListS2CPacket.send(handler.getPlayer());
+		});
 	}
 }

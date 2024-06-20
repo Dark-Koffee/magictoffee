@@ -2,8 +2,8 @@ package koffee.magictoffee;
 
 import koffee.magictoffee.HudOverlay.SpellsListHud;
 import koffee.magictoffee.block.ModBlocks;
+import koffee.magictoffee.client.ClientPacketHandler;
 import koffee.magictoffee.event.LeftClickHandler;
-import koffee.magictoffee.networking.ModMessages;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -16,6 +16,10 @@ public class MagicToffeeClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.spellcaster, RenderLayer.getCutout());
 
 		LeftClickHandler.register();
+
+		// Register Server to Client packets
+		ClientPacketHandler.register();
+
 		HudRenderCallback.EVENT.register(new SpellsListHud());
 	}
 }
