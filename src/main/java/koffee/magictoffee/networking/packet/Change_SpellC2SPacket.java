@@ -20,10 +20,11 @@ public class Change_SpellC2SPacket {
         if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof WandItem) {
 
             if (player.isSneaking()) {
-                int test = SpellData.addSelected((IEntityDataSaver) player, -1);
+                // Yes the 1 to go "back" and -1 to go "forwards" is intentional. It feels more natural to me.
+                int test = SpellData.addSelected((IEntityDataSaver) player, 1);
                 player.sendMessage(Text.literal("Change spell back" + String.valueOf(test)), true);
             } else {
-                int test = SpellData.addSelected((IEntityDataSaver) player, 1);
+                int test = SpellData.addSelected((IEntityDataSaver) player, -1);
                 player.sendMessage(Text.literal("Change spell" + String.valueOf(test)), true);
             }
             player.playSound(SoundEvents.BLOCK_DISPENSER_FAIL, SoundCategory.BLOCKS, 1.0F, 2.0F);
