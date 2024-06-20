@@ -1,7 +1,7 @@
 package koffee.magictoffee.event;
-
-import koffee.magictoffee.spells.MagicMissile;
 import koffee.magictoffee.spells.Spell;
+import koffee.magictoffee.util.IEntityDataSaver;
+import koffee.magictoffee.util.SpellData;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
@@ -20,8 +20,8 @@ public class WandAttackHandler {
             if (isWandInHand(player, hand)) {
                 // Handles casting spells with the wand
                 player.sendMessage(Text.literal("Cast spell"), true);
-                Spell magicmissile = new MagicMissile();
-                magicmissile.ActionOnUse(player);
+                Spell spell = SpellData.getSpellFromID(SpellData.getSpell((IEntityDataSaver) player, SpellData.getSelected((IEntityDataSaver) player)));
+                spell.ActionOnUse(player);
                 return TypedActionResult.success(player.getStackInHand(hand));
             }
             return TypedActionResult.pass(player.getStackInHand(hand));
