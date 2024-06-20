@@ -11,5 +11,13 @@ public class SpellRegisterer {
         return spell;
     }
 
+    public static String[] spellList() {
+        String[] spellNames = new String[spells.size()];
+        for (int i = 0; i < spells.size(); i++) {
+            spellNames[i] = spells.get(i).getDisplayName();
+        }
+        return null;
+    }
+
 }
 
