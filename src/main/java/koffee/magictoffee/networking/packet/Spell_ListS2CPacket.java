@@ -1,18 +1,20 @@
 package koffee.magictoffee.networking.packet;
 
-import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import koffee.magictoffee.networking.ModMessages;
+import koffee.magictoffee.util.IEntityDataSaver;
+import koffee.magictoffee.util.SpellData;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 
 public class Spell_ListS2CPacket {
-    public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
-                               PacketByteBuf buf, PacketSender responseSender) {
+    public static void send(ServerPlayerEntity player) {
+        PacketByteBuf buf = PacketByteBufs.create();
         for (int i = 0; i < 5; i++) {
-            // 32767 is the maximum string length in Minecraft
-            player.sendMessage(Text.of(buf.readString(32767)), false);
+            buf.writeString(SpellData.getSpell((IEntityDataSaver) player, i), 32767);
         }
+        buf.writeInt(SpellData.getSelected(((IEntityDataSaver) player)));
+        ServerPlayNetworking.send(player, ModMessages.SPELL_LIST, buf);
     }
 }
