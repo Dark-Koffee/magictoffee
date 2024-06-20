@@ -8,6 +8,8 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 
@@ -24,6 +26,8 @@ public class Change_SpellC2SPacket {
                 int test = SpellData.addSelected((IEntityDataSaver) player, 1);
                 player.sendMessage(Text.literal("Change spell" + String.valueOf(test)), true);
             }
+            player.playSound(SoundEvents.BLOCK_DISPENSER_FAIL, SoundCategory.BLOCKS, 1.0F, 2.0F);
+            Spell_ListS2CPacket.send(player);
         }
     }
 }
