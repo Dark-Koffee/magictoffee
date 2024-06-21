@@ -11,6 +11,8 @@ public class ModSpells {
     public static final Spell magicMissile = registerSpell(new MagicMissile());
     // Push Spell
     public static final Spell pushSpell = registerSpell((new PushSpell()));
+    // Pull Spell
+    public static final Spell pullSpell = registerSpell(new PullSpell());
 
     private static Spell registerSpell(Spell spell) {
         return new SpellRegisterer().register(spell);
