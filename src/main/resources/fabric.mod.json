@@ -37,9 +37,21 @@
 		"fabricloader": ">=0.15.11",
 		"minecraft": "~1.20.2",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"cardinal-components-base": ">=3.0.0",
+		"cardinal-components-entity": ">=3.0.0"
 	},
 	"suggests": {
 		"another-mod": "*"
+	},
+	"custom": {
+		"cardinal-components": [
+			"magictoffee:spell0",
+			"magictoffee:spell1",
+			"magictoffee:spell2",
+			"magictoffee:spell3",
+			"magictoffee:spell4",
+			"magictoffee:selected"
+		]
 	}
 }
