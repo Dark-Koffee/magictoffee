@@ -36,7 +36,7 @@ public class PushSpell extends Spell{
             // Using addVelocity for additive effect
             player.addVelocity(desiredVector);
 
-            // Play woosh sound for the player
+            // Play whoosh sound for the player
             player.playSound(SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.AMBIENT, 1.0F, 2.0F);
 
             // Draw the circle
