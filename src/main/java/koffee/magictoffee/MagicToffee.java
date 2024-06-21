@@ -1,5 +1,6 @@
 package koffee.magictoffee;
 
+import com.mojang.brigadier.CommandDispatcher;
 import koffee.magictoffee.block.ModBlocks;
 import koffee.magictoffee.block.entity.ModBlockEntities;
 import koffee.magictoffee.commands.SpellsCommand;
@@ -13,6 +14,12 @@ import koffee.magictoffee.spells.ModSpells;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Text;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,5 +64,24 @@ public class MagicToffee implements ModInitializer {
 
 		// Commands
 		CommandRegistrationCallback.EVENT.register(SpellsCommand::register);
+		CommandRegistrationCallback.EVENT.register(this::registerCommands);
+	}
+
+	private void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess, CommandManager.RegistrationEnvironment registrationEnvironment) {
+		dispatcher.register(CommandManager.literal("targetedEntity")
+				.executes(context -> {
+					ServerCommandSource source = context.getSource();
+					if (source.getEntity() instanceof net.minecraft.server.network.ServerPlayerEntity player) {
+						HitResult hitResult = player.raycast(20, 0, false); // 20 is the distance, you can change it
+						if (hitResult.getType() == HitResult.Type.ENTITY) {
+							EntityHitResult entityHitResult = (EntityHitResult) hitResult;
+							source.sendMessage(Text.literal("Targeted Entity: " + entityHitResult.getEntity().getName().getString()));
+						} else {
+							source.sendMessage(Text.literal("No entity targeted"));
+						}
+					}
+					return 1;
+				})
+		);
 	}
 }
