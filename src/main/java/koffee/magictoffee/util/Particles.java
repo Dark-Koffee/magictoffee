@@ -63,7 +63,7 @@ public class Particles {
         }
     }
 
-    public static Vec3d rotateAroundAxis(Vec3d vec, Vec3d axis, double angle) {
+    private static Vec3d rotateAroundAxis(Vec3d vec, Vec3d axis, double angle) {
         double cos = Math.cos(angle);
         double sin = Math.sin(angle);
         double dot = vec.dotProduct(axis);
