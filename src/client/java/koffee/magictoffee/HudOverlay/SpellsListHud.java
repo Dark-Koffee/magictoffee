@@ -18,13 +18,13 @@ import net.minecraft.util.Identifier;
 public class SpellsListHud implements HudRenderCallback {
 
     private final Identifier[] textureIdentifiers = {
-            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Top_Left"),
-            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Top"),
-            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Top_Right"),
-            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Middle"),
-            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Bottom_Left"),
-            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Bottom"),
-            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Bottom_Right")
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_top_left.png"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_top.png"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_top_right.png"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_middle.png"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_bottom_left.png"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_bottom.png"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_bottom_right.png")
     };
 
     private final int[] textureWidths = new int[textureIdentifiers.length];
