@@ -46,14 +46,14 @@ public class SpellsCommand {
                                         .suggests(slotSuggestionProvider)  // Suggestions for slot
                                         .then(CommandManager.argument("spell", StringArgumentType.greedyString())
                                                 .suggests(spellSuggestionProvider)  // Suggestions for spell
-                                                .executes(context -> executeSet(context))
+                                                .executes(SpellsCommand::executeSet)
                                         )
                                 )
                         )
                 )
                 .then(CommandManager.literal("get")
                         .then(CommandManager.argument("player", EntityArgumentType.player())
-                                .executes(context -> executeGet(context))
+                                .executes(SpellsCommand::executeGet)
                         )
                 );
 
@@ -68,10 +68,10 @@ public class SpellsCommand {
         if (isValidSpell(spell)) {
             SpellData.setSpell(player, slot-1, spell);
             Spell_ListS2CPacket.send(player);
-            executor.sendMessage(Text.literal("\u00A7dSpell slot " + slot + " for \u00A75" + player.getEntityName() + "\u00A7d set to \u00A76" + spell));
+            executor.sendMessage(Text.literal("§dSpell slot " + slot + " for §5" + player.getEntityName() + "§d set to §6" + spell));
             return 1;
         } else {
-            executor.sendMessage(Text.literal("\u00A7cInvalid Spell!"));
+            executor.sendMessage(Text.literal("§cInvalid Spell!"));
             return 0;
         }
     }
@@ -79,9 +79,9 @@ public class SpellsCommand {
     private static int executeGet(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
         ServerCommandSource executor = context.getSource();
-        executor.sendMessage(Text.literal("\u00A75" + player.getEntityName() + "'s Spells"));
+        executor.sendMessage(Text.literal("§5" + player.getEntityName() + "'s Spells"));
         for (int i = 0; i < 5; i++) {
-            executor.sendMessage(Text.literal("\u00A75" + String.valueOf(5-i) + ". \u00A7d" + SpellData.getSpellName(SpellData.getSpell(player, 4-i))));
+            executor.sendMessage(Text.literal("§5" + (5 - i) + ". §d" + SpellData.getSpellName(SpellData.getSpell(player, 4-i))));
         }
         return 1;
     }

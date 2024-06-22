@@ -14,6 +14,7 @@ import koffee.magictoffee.spells.ModSpells;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ public class MagicToffee implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final String MOD_ID = "magictoffee";
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final Logger LOGGER = LoggerFactory.getLogger("MagicToffee");
 
 
 	@Override
@@ -53,7 +54,9 @@ public class MagicToffee implements ModInitializer {
 
 		// Register the event listener for player join
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-			Spell_ListS2CPacket.send(handler.getPlayer());
+			ServerPlayerEntity player = handler.getPlayer();
+			Spell_ListS2CPacket.send(player);
+			LOGGER.info(player.getName().getString() + " successfully sent Spell Packets on Join");
 		});
 
 		// Commands

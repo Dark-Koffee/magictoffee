@@ -4,6 +4,8 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,9 +14,7 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
     private int selected = 0;
     private final String[] spells = new String[5];
     { // Default value of all empty slots
-        for (int i = 0; i < spells.length; i++) {
-            spells[i] = "magictoffee:empty";
-        }
+        Arrays.fill(spells, "magictoffee:empty");
     }
     private final Map<String, Long> spellCooldowns = new HashMap<>();
 

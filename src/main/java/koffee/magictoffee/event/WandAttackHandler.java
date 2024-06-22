@@ -47,7 +47,7 @@ public class WandAttackHandler {
                         }
                     } else {
                         player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 0.5F, 1.0F);
-                        player.sendMessage(Text.literal("§cCooldown: " + String.format("%.2f", (lastUsed + spellCooldown - currentTime)/20.0f) + " Sec"), true);
+                        player.sendMessage(Text.literal("§cCooldown: " + String.format("%.1f", (lastUsed + spellCooldown - currentTime)/20.0f) + " Sec"), true);
                     }
                 }
             }

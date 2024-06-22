@@ -24,9 +24,7 @@ public class SpellData {
     public static int getSelected(PlayerEntity player) {
         MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
         // Selected is set to 0 if it doesn't exist
-        int selected = 0;
-        selected = component.getSelected();
-        return selected;
+        return component.getSelected();
     }
     public static void setSpell(PlayerEntity player, int spellIndex, String spellName) {
         MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);

@@ -20,10 +20,10 @@ public class Change_SpellC2SPacket {
 
             if (player.isSneaking()) {
                 int test = SpellData.addSelected(player, -1);
-                player.sendMessage(Text.literal("\u00A77Change spell back" + String.valueOf(test+1)), true);
+                player.sendMessage(Text.literal("§7Change spell back" + (test + 1)), true);
             } else {
                 int test = SpellData.addSelected(player, 1);
-                player.sendMessage(Text.literal("\u00A77Change spell" + String.valueOf(test+1)), true);
+                player.sendMessage(Text.literal("§7Change spell" + (test + 1)), true);
             }
             player.playSound(SoundEvents.BLOCK_DISPENSER_FAIL, SoundCategory.BLOCKS, 1.0F, 2.0F);
             Spell_ListS2CPacket.send(player);

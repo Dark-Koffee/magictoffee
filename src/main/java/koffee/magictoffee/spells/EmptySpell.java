@@ -13,7 +13,7 @@ public class EmptySpell extends Spell {
 
     @Override
     public boolean ActionOnUse(PlayerEntity user){
-        user.sendMessage(Text.literal("\u00A77No spell selected"), true);
+        user.sendMessage(Text.literal("§7No spell selected"), true);
         return false;
     }
 
