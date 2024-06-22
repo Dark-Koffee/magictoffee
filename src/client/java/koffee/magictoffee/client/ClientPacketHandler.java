@@ -2,7 +2,6 @@ package koffee.magictoffee.client;
 
 import koffee.magictoffee.networking.ModMessages;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.network.ClientPlayerEntity;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ public class ClientPacketHandler {
     public static void register() {
         ClientPlayNetworking.registerGlobalReceiver(ModMessages.SPELL_LIST, (client, handler, buf, responseSender) -> {
             client.execute(() -> {
-                ClientPlayerEntity player = client.player;
                 // Register spells
                 for (int i = 0; i < 5; i++) {
                     // 32767 is the maximum string length in Minecraft
