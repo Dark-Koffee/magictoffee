@@ -24,6 +24,9 @@
 		],
 		"fabric-datagen": [
 			"koffee.magictoffee.MagicToffeeDataGenerator"
+		],
+		"cardinal-components-entity": [
+			"koffee.magictoffee.components.ModComponents"
 		]
 	},
 	"mixins": [
@@ -46,12 +49,7 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"magictoffee:spell0",
-			"magictoffee:spell1",
-			"magictoffee:spell2",
-			"magictoffee:spell3",
-			"magictoffee:spell4",
-			"magictoffee:selected"
+			"magictoffee:spells"
 		]
 	}
 }
