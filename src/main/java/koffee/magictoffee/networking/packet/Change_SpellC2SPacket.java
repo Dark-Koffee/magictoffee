@@ -1,7 +1,6 @@
 package koffee.magictoffee.networking.packet;
 
 import koffee.magictoffee.item.custom.WandItem;
-import koffee.magictoffee.util.IEntityDataSaver;
 import koffee.magictoffee.util.SpellData;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.network.PacketByteBuf;
@@ -20,10 +19,10 @@ public class Change_SpellC2SPacket {
         if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof WandItem) {
 
             if (player.isSneaking()) {
-                int test = SpellData.addSelected((IEntityDataSaver) player, -1);
+                int test = SpellData.addSelected(player, -1);
                 player.sendMessage(Text.literal("\u00A77Change spell back" + String.valueOf(test+1)), true);
             } else {
-                int test = SpellData.addSelected((IEntityDataSaver) player, 1);
+                int test = SpellData.addSelected(player, 1);
                 player.sendMessage(Text.literal("\u00A77Change spell" + String.valueOf(test+1)), true);
             }
             player.playSound(SoundEvents.BLOCK_DISPENSER_FAIL, SoundCategory.BLOCKS, 1.0F, 2.0F);

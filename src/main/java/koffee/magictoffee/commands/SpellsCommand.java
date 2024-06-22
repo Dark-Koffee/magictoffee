@@ -9,7 +9,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
 import koffee.magictoffee.spells.SpellRegisterer;
-import koffee.magictoffee.util.IEntityDataSaver;
 import koffee.magictoffee.util.SpellData;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.CommandSource;
@@ -67,7 +66,7 @@ public class SpellsCommand {
         int slot = IntegerArgumentType.getInteger(context, "slot");
         String spell = StringArgumentType.getString(context, "spell");
         if (isValidSpell(spell)) {
-            SpellData.setSpell((IEntityDataSaver) player, slot-1, spell);
+            SpellData.setSpell(player, slot-1, spell);
             Spell_ListS2CPacket.send(player);
             executor.sendMessage(Text.literal("\u00A7dSpell slot " + slot + " for \u00A75" + player.getEntityName() + "\u00A7d set to \u00A76" + spell));
             return 1;
@@ -82,7 +81,7 @@ public class SpellsCommand {
         ServerCommandSource executor = context.getSource();
         executor.sendMessage(Text.literal("\u00A75" + player.getEntityName() + "'s Spells"));
         for (int i = 0; i < 5; i++) {
-            executor.sendMessage(Text.literal("\u00A75" + String.valueOf(5-i) + ". \u00A7d" + SpellData.getSpellName(SpellData.getSpell((IEntityDataSaver) player, 4-i))));
+            executor.sendMessage(Text.literal("\u00A75" + String.valueOf(5-i) + ". \u00A7d" + SpellData.getSpellName(SpellData.getSpell(player, 4-i))));
         }
         return 1;
     }

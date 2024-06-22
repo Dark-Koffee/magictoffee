@@ -1,11 +1,10 @@
 package koffee.magictoffee.event;
 import koffee.magictoffee.spells.Spell;
-import koffee.magictoffee.util.IEntityDataSaver;
+import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.util.SpellData;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import koffee.magictoffee.item.custom.WandItem;
@@ -16,13 +15,14 @@ public class WandAttackHandler {
 
     public static void register() {
         // When the player right clicks with a wand
+        // Handles casting spells with the wand
         UseItemCallback.EVENT.register((player, world, hand) -> {
             // Running on server
             if (!world.isClient) {
                 if (isWandInHand(player, hand)) {
-                    // Handles casting spells with the wand
-//                    player.sendMessage(Text.literal("Cast spell"), true);
-                    Spell spell = SpellData.getSpellFromID(SpellData.getSpell((IEntityDataSaver) player, SpellData.getSelected((IEntityDataSaver) player)));
+                    // Get the player's selected spell
+                    Spell spell = SpellData.getSpellFromID(SpellData.getSpell(player, SpellData.getSelected(player)));
+                    // Run the player's selected spell's action
                     spell.ActionOnUse(player);
                     return TypedActionResult.success(player.getStackInHand(hand));
                 }
