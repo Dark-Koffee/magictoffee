@@ -3,6 +3,7 @@ package koffee.magictoffee.components;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.Arrays;
@@ -94,6 +95,15 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
     private void sync() {
         if (entity instanceof ServerPlayerEntity) {
             ModComponents.SPELLS_COMPONENT_KEY.sync(entity);
+        }
+    }
+
+    // For packets to talk to client
+    public void writeCooldownsToBuf(PacketByteBuf buf) {
+        buf.writeInt(spellCooldowns.size()); // Write the size of the map
+        for (Map.Entry<String, Long> entry : spellCooldowns.entrySet()) {
+            buf.writeString(entry.getKey()); // Write the spell ID
+            buf.writeLong(entry.getValue()); // Write the cooldown
         }
     }
 }

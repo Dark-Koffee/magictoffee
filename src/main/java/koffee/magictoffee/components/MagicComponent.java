@@ -1,6 +1,7 @@
 package koffee.magictoffee.components;
 
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
+import net.minecraft.network.PacketByteBuf;
 
 public interface MagicComponent extends ComponentV3 {
     int getSelected();
@@ -11,4 +12,6 @@ public interface MagicComponent extends ComponentV3 {
 
     long getCooldown(String spellID);
     void setCooldown(String spellID, long cooldown);
+
+    void writeCooldownsToBuf(PacketByteBuf buf);
 }
