@@ -5,11 +5,11 @@ import net.minecraft.world.World;
 
 public abstract class Spell {
     // -- Spell Class Fields --
-    protected String spellID;
-    protected String spellType;
-    protected String displayName;
-    protected int cooldown;
-    protected int manaCost;
+    protected String spellID; // e.g. magictoffee:magicmissile
+    protected String spellType; // e.g. generic
+    protected String displayName; // e.g. Magic Missile
+    protected long cooldown; // in ticks e.g. 20
+    protected int manaCost; // in mana e.g. 10
 
     // -- Spell Class Constructors --
 
@@ -18,8 +18,8 @@ public abstract class Spell {
         this.spellID = "magictoffee:none";
         this.spellType = "Basic";
         this.displayName = "Unknown";
-        this.cooldown = 0;
-        this.manaCost = 0;
+        this.cooldown = 20;
+        this.manaCost = 5;
     }
 
     // Overloaded Constructor
@@ -35,7 +35,7 @@ public abstract class Spell {
 
     // ActionOnUse has to be overloaded
     // What the spell does on use
-    public abstract void ActionOnUse(PlayerEntity player);
+    public abstract boolean ActionOnUse(PlayerEntity player);
 
     // Getters and Setters for Spell
     public String getID() {
@@ -50,7 +50,7 @@ public abstract class Spell {
         return this.spellType;
     }
 
-    public int getCooldown() {
+    public long getCooldown() {
         return this.cooldown;
     }
 
