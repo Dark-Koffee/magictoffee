@@ -8,4 +8,7 @@ public interface MagicComponent extends ComponentV3 {
 
     String getSpell(int index);
     void setSpell(int index, String spell);
+
+    long getCooldown(String spellID);
+    void setCooldown(String spellID, long cooldown);
 }
