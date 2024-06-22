@@ -13,6 +13,8 @@ public class ModSpells {
     public static final Spell pushSpell = registerSpell((new PushSpell()));
     // Pull Spell
     public static final Spell pullSpell = registerSpell(new PullSpell());
+    // Heal Spell
+    public static final Spell healSpell = registerSpell(new HealSpell());
 
     private static Spell registerSpell(Spell spell) {
         return new SpellRegisterer().register(spell);
