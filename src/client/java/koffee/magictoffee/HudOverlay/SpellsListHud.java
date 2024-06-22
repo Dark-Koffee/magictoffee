@@ -1,5 +1,6 @@
 package koffee.magictoffee.HudOverlay;
 
+import koffee.magictoffee.MagicToffee;
 import koffee.magictoffee.client.ClientPacketHandler;
 import koffee.magictoffee.event.WandAttackHandler;
 import koffee.magictoffee.spells.Spell;
@@ -8,10 +9,26 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.texture.NativeImage;
+import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 
 public class SpellsListHud implements HudRenderCallback {
+
+    private final Identifier[] textureIdentifiers = {
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Top_Left"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Top"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Top_Right"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Middle"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Bottom_Left"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Bottom"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/Hud_Bottom_Right")
+    };
+
+    private final int[] textureWidths = new int[textureIdentifiers.length];
+    private final int[] textureHeights = new int[textureIdentifiers.length];
 
     @Override
     public void onHudRender(DrawContext drawContext, float tickDelta) {
@@ -54,7 +71,7 @@ public class SpellsListHud implements HudRenderCallback {
 
                 // Colors the spell's name depending on whether it's selected or not
                 String prefix = "§8"; // Default Spell Color
-                String starPrefix = "§7"; // Default Star Color
+                String starPrefix = "§8"; // Default Star Color
                 if (i == 0) {
                     prefix = "§7"; // Selected Spell Color
                     starPrefix = "§f"; // Selected Star color
@@ -74,6 +91,8 @@ public class SpellsListHud implements HudRenderCallback {
 
                 spellsList[(i-2)*-1] = prefix + text;
             }
+
+
             for (int i = 0; i <= 4; i++) {
 
                 // Calculate the x and y coordinates to render the text in the bottom right corner
@@ -84,4 +103,22 @@ public class SpellsListHud implements HudRenderCallback {
             }
         }
     }
+
+    private void getTextureDimensions() {
+        MinecraftClient client = MinecraftClient.getInstance();
+
+        for (int i = 0; i < textureIdentifiers.length; i++)
+        {
+            NativeImageBackedTexture texture = (NativeImageBackedTexture) client.getTextureManager()
+                    .getTexture(textureIdentifiers[i]);
+            if (texture != null) {
+                NativeImage image = texture.getImage();
+                if (image != null) {
+                    textureWidths[i] = image.getWidth();
+                    textureHeights[i] = image.getHeight();
+                }
+            }
+        }
+    }
+
 }
