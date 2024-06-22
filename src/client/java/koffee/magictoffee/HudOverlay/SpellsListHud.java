@@ -38,6 +38,11 @@ public class SpellsListHud implements HudRenderCallback {
         if (WandAttackHandler.isWandInHand(client.player, Hand.MAIN_HAND)) {
             TextRenderer renderer = client.textRenderer;
 
+            // Binds all the textures
+            for (Identifier textureIdentifier : textureIdentifiers) {
+                client.getTextureManager().bindTexture(textureIdentifier);
+            }
+
             // Obtain the screen width and height
             int screenWidth = client.getWindow().getScaledWidth();
             int screenHeight = client.getWindow().getScaledHeight();
