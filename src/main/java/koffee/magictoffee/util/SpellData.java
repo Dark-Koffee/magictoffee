@@ -10,8 +10,16 @@ public class SpellData {
     public static int addSelected(PlayerEntity player, int amount) {
         MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
         int selected = component.getSelected();
-        component.setSelected(selected+amount);
-        return selected+amount;
+        selected = selected + amount;
+        // Loop back around when out of range
+        if (selected < 0) {
+            selected = 4;
+        } else if (selected > 4) {
+            selected = 0;
+        }
+        // Set component selected and return selected
+        component.setSelected(selected);
+        return selected;
     }
     public static int getSelected(PlayerEntity player) {
         MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
