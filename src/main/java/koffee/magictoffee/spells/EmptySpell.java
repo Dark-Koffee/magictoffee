@@ -7,7 +7,7 @@ public class EmptySpell extends Spell {
     EmptySpell() {
         super.spellID = "magictoffee:empty";
         super.displayName = "Empty Slot";
-        super.cooldown = 0;
+        super.cooldown = -1;
         super.manaCost = 0;
     }
 
