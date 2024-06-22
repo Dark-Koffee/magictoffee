@@ -1,5 +1,7 @@
 package koffee.magictoffee.spells;
 
+import koffee.magictoffee.components.ModComponents;
+import koffee.magictoffee.util.KoffeeSpellTools;
 import koffee.magictoffee.util.Particles;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
@@ -18,8 +20,8 @@ public class PullSpell extends Spell{
     }
 
     @Override
-    public void ActionOnUse(PlayerEntity player) {
-        Vec3d targetBlock = getTargetBlock(player);
+    public boolean ActionOnUse(PlayerEntity player) {
+        Vec3d targetBlock = KoffeeSpellTools.getTargetBlock(player, 30, false);
         Vec3d playerPos = player.getPos();
 
         if (targetBlock != null) {
@@ -40,19 +42,11 @@ public class PullSpell extends Spell{
 
             // Update on the client
             player.velocityModified = true;
+            return true;
         } else {
             player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
-        }
-    }
-
-    private Vec3d getTargetBlock(PlayerEntity player) {
-        HitResult hitResult = player.raycast(30.0D, 0.0F, false);
-        if (hitResult.getType() == HitResult.Type.BLOCK) {
-            BlockHitResult targetBlock = (BlockHitResult) hitResult;
-            return targetBlock.getPos();
-        }
-        else {
-            return null;
+            ModComponents.SPELLS_COMPONENT_KEY.get(player).setCooldown(spellID, 0);
+            return false;
         }
     }
 }
