@@ -12,8 +12,8 @@ public class EmptySpell extends Spell {
     }
 
     @Override
-    public boolean ActionOnUse(PlayerEntity user){
-        user.sendMessage(Text.literal("§7No spell selected"), true);
+    public boolean ActionOnUse(PlayerEntity player){
+        player.sendMessage(Text.literal("§7No spell selected"), true);
         return false;
     }
 
