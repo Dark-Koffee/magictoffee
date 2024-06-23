@@ -3,7 +3,7 @@ package koffee.magictoffee.spells;
 import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.components.ModComponents;
 import koffee.magictoffee.util.KoffeeSpellTools;
-import koffee.magictoffee.util.Particles;
+import koffee.magictoffee.util.DrawTools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
@@ -47,7 +47,7 @@ public class PushSpell extends Spell{
             Vec3d particlePos = (entityResult.getHitPos()).add(offset);
 
             // Draw a line between the entity and the player
-            Particles.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0);
+            DrawTools.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0);
 
             return true;
         }
@@ -69,7 +69,7 @@ public class PushSpell extends Spell{
             player.playSound(SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.AMBIENT, 1.0F, 2.0F);
 
             // Draw the circle
-            Particles.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0);
+            DrawTools.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0);
 
             // Update on the client
             player.velocityModified = true;

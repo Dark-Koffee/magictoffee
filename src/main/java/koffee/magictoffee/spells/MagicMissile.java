@@ -4,7 +4,7 @@ import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.components.ModComponents;
 import koffee.magictoffee.damage.ModDamageTypes;
 import koffee.magictoffee.util.KoffeeSpellTools;
-import koffee.magictoffee.util.Particles;
+import koffee.magictoffee.util.DrawTools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.Angerable;
@@ -54,7 +54,7 @@ public class MagicMissile extends Spell {
 
         // If it doesn't hit anything
         if (targetEntity == null && targetBlock == null) {
-            Particles.drawCircle(world, eyePos, 0.5, 0, 0, 32, ParticleTypes.INSTANT_EFFECT, 0);
+            DrawTools.drawCircle(world, eyePos, 0.5, 0, 0, 32, ParticleTypes.INSTANT_EFFECT, 0);
             player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
             MagicComponent magicComponent = ModComponents.SPELLS_COMPONENT_KEY.get(player);
             magicComponent.setCooldown(spellID, player.getWorld().getTime() - cooldown/2);
@@ -120,14 +120,14 @@ public class MagicMissile extends Spell {
         eyePos = new Vec3d(eyePos.x, eyePos.y - 0.2, eyePos.z);
 
         // Draw particle line
-        Particles.drawLine(world, eyePos, targetEntityLoc, 30, ParticleTypes.ELECTRIC_SPARK, 0);
+        DrawTools.drawLine(world, eyePos, targetEntityLoc, 30, ParticleTypes.ELECTRIC_SPARK, 0);
         player.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
         return true;
     }
     private boolean hitBlockAction(Vec3d eyePos, PlayerEntity player, ServerWorld world) {
         // Move line down 0.2 blocks
         eyePos = new Vec3d(eyePos.x, eyePos.y - 0.2, eyePos.z);
-        Particles.drawLine(world, eyePos, player.raycast(20.0D, 1.0F, true).getPos(), 30, ParticleTypes.ELECTRIC_SPARK, 0);
+        DrawTools.drawLine(world, eyePos, player.raycast(20.0D, 1.0F, true).getPos(), 30, ParticleTypes.ELECTRIC_SPARK, 0);
         player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
         MagicComponent magicComponent = ModComponents.SPELLS_COMPONENT_KEY.get(player);
         magicComponent.setCooldown(spellID, player.getWorld().getTime() - cooldown/2);
