@@ -17,7 +17,7 @@ public class MagicMissile extends Spell {
     public MagicMissile() {
         super.spellID = "magictoffee:magicmissile";
         super.displayName = "Magic Missile";
-        super.cooldown = 40;
+        super.cooldown = 10;
     }
 
     @Override
@@ -40,12 +40,12 @@ public class MagicMissile extends Spell {
 
         // Now, some people may say
         // "Wait a second toffee, that looks like a lot of reused code why don't you just use funct-" Shhhhhhh
-        // To those people I say, If it ain't broke, don't fix it.
+        // To those people I say, If it ain't broke, don't fix it. ~~ Toffee 2024
 
 
         // If it doesn't hit anything
         if (targetEntity == null && targetBlock == null) {
-            world.spawnParticles(ParticleTypes.ELECTRIC_SPARK, eyePos.x, eyePos.y, eyePos.z, 30, 0.1, 0.1, 0.1, 0);
+            Particles.drawCircle(world, eyePos, 0.5, 0, 0, 32, ParticleTypes.INSTANT_EFFECT, 0);
             player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
             ModComponents.SPELLS_COMPONENT_KEY.get(player).setCooldown(spellID, 0);
             return false;
@@ -56,7 +56,7 @@ public class MagicMissile extends Spell {
                 eyePos = new Vec3d(eyePos.x, eyePos.y - 0.2, eyePos.z);
                 Particles.drawLine(world, eyePos, player.raycast(20.0D, 1.0F, true).getPos(), 30, ParticleTypes.ELECTRIC_SPARK, 0);
                 player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
-                ModComponents.SPELLS_COMPONENT_KEY.get(player).setCooldown(spellID, player.getWorld().getTime()-10L);
+                ModComponents.SPELLS_COMPONENT_KEY.get(player).setCooldown(spellID, player.getWorld().getTime()-5L);
                 return false;
             }
             // If only the entity is valid
@@ -69,6 +69,11 @@ public class MagicMissile extends Spell {
 //                ((LivingEntity) entity).setHealth(((LivingEntity) entity).getHealth()-1);
                     targetEntity.damage(targetEntity.getDamageSources().generic(), 2.0F);
                 }
+
+                // pushes the target entity backwards
+                Vec3d velocity = (targetEntity.getPos()).subtract(player.getPos());
+                Vec3d desiredVelocity = (velocity.normalize()).multiply(0.5);
+                targetEntity.addVelocity(desiredVelocity.x, 0.5, desiredVelocity.z);
 
                 // Move line down 0.2 blocks
                 eyePos = new Vec3d(eyePos.x, eyePos.y - 0.2, eyePos.z);
@@ -90,6 +95,11 @@ public class MagicMissile extends Spell {
                     targetEntity.damage(targetEntity.getDamageSources().generic(), 2.0F);
                 }
 
+                // pushes the target entity backwards
+                Vec3d velocity = (targetEntity.getPos()).subtract(player.getPos());
+                Vec3d desiredVelocity = (velocity.normalize()).multiply(0.5);
+                targetEntity.addVelocity(desiredVelocity.x, 0.5, desiredVelocity.z);
+
                 // Move line down 0.2 blocks
                 eyePos = new Vec3d(eyePos.x, eyePos.y - 0.2, eyePos.z);
 
@@ -104,7 +114,7 @@ public class MagicMissile extends Spell {
                 eyePos = new Vec3d(eyePos.x, eyePos.y - 0.2, eyePos.z);
                 Particles.drawLine(world, eyePos, player.raycast(20.0D, 1.0F, true).getPos(), 30, ParticleTypes.ELECTRIC_SPARK, 0);
                 player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
-                ModComponents.SPELLS_COMPONENT_KEY.get(player).setCooldown(spellID, player.getWorld().getTime()-10L);
+                ModComponents.SPELLS_COMPONENT_KEY.get(player).setCooldown(spellID, player.getWorld().getTime()-5L);
                 return false;
             }
         }
