@@ -22,11 +22,10 @@ public class HealSpell extends Spell{
         // Play fwip sound for the player
         player.playSound(SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), SoundCategory.AMBIENT, 1.0F, 2.0F);
 
-        // Draw 3 rings of hearts around the player
+        // Draw a ring of hearts around the player
         Vec3d loc = player.getPos();
-        for (double i = 0; i < 1.5; i += 0.5) {
-            Particles.drawCircle((ServerWorld) player.getWorld(), new Vec3d(loc.getX(), loc.getY()+i, loc.getZ()), 1F, 0F, 0F, 24, ParticleTypes.HEART, 1);
-        }
+        Particles.drawCircle((ServerWorld) player.getWorld(), new Vec3d(loc.getX(), loc.getY()+1, loc.getZ()), 1F, 0F, 0F, 24, ParticleTypes.HEART, 1);
+
         // Heal and feed the player
         player.heal(4);
         player.getHungerManager().add(4, 0.5F);
