@@ -12,12 +12,22 @@ import koffee.magictoffee.item.ModItemGroups;
 import koffee.magictoffee.item.ModItems;
 import koffee.magictoffee.networking.ModMessages;
 import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
+import koffee.magictoffee.screen.SpellcasterScreenHandler;
 import koffee.magictoffee.spells.ModSpells;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +38,20 @@ public class MagicToffee implements ModInitializer {
 	public static final String MOD_ID = "magictoffee";
 	public static final Logger LOGGER = LoggerFactory.getLogger("MagicToffee");
 	private int tickCounter = 0;
+
+	// Screen Handler (Spellcaster GUI)
+	public static final ScreenHandlerType<SpellcasterScreenHandler> SPELLCASTER_SCREEN_HANDLER_SCREEN_HANDLER_TYPE;
+
+	// Particles
+	public static final RegistryKey<ParticleType<?>> HEART_KEY = RegistryKey.of(Registries.PARTICLE_TYPE.getKey(), new Identifier(MOD_ID, "heart"));
+	public static final DefaultParticleType HEART = FabricParticleTypes.simple();
+
+
+	static {
+		SPELLCASTER_SCREEN_HANDLER_SCREEN_HANDLER_TYPE = ScreenHandlerRegistry.registerSimple(
+				new Identifier(MOD_ID, "spellcaster"), SpellcasterScreenHandler::new
+		);
+	}
 
 
 	@Override
@@ -55,6 +79,10 @@ public class MagicToffee implements ModInitializer {
 
 		// Enchantments
 		ModEnchantments.registerModEnchantments();
+
+		// Particles
+//		Registry.register(Registries.PARTICLE_TYPE, new Identifier(MOD_ID, "heart"), HEART);
+		Registry.register(Registries.PARTICLE_TYPE, HEART_KEY.getValue(), HEART);
 
 		// Register the event listener for player join
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {

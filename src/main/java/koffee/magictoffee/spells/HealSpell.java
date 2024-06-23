@@ -1,5 +1,6 @@
 package koffee.magictoffee.spells;
 
+import koffee.magictoffee.MagicToffee;
 import koffee.magictoffee.util.Particles;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
@@ -24,6 +25,7 @@ public class HealSpell extends Spell{
 
         // Draw a ring of hearts around the player
         Vec3d loc = player.getPos();
+//        Particles.drawCircle((ServerWorld) player.getWorld(), new Vec3d(loc.getX(), loc.getY()+1, loc.getZ()), 1F, 0F, 0F, 24, MagicToffee.HEART, 1);
         Particles.drawCircle((ServerWorld) player.getWorld(), new Vec3d(loc.getX(), loc.getY()+1, loc.getZ()), 1F, 0F, 0F, 24, ParticleTypes.HEART, 1);
 
         // Heal and feed the player

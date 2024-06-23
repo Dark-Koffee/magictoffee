@@ -2,12 +2,13 @@ package koffee.magictoffee.block;
 
 import koffee.magictoffee.block.entity.ModBlockEntities;
 import koffee.magictoffee.block.entity.SpellcasterBlockEntity;
+import koffee.magictoffee.screen.SpellcasterScreenHandler;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -42,11 +43,8 @@ public class SpellcasterBlock extends BlockWithEntity implements BlockEntityProv
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            player.sendMessage(Text.literal("\u00A78[\u00A77\u00A7oInsert opening of gui here\u00A78]"), false);
-            NamedScreenHandlerFactory screenHandlerFactory = ((SpellcasterBlockEntity) world.getBlockEntity(pos));
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
-            }
+            //player.sendMessage(Text.literal("\u00A78[\u00A77\u00A7oInsert opening of gui here\u00A78]"), false);
+            player.openHandledScreen(new SimpleNamedScreenHandlerFactory((syncId, inv, p) -> new SpellcasterScreenHandler(syncId, inv), Text.of("Spellcaster")));
         }
 
         return ActionResult.SUCCESS;
