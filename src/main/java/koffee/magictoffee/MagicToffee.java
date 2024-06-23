@@ -2,6 +2,7 @@ package koffee.magictoffee;
 
 import koffee.magictoffee.block.ModBlocks;
 import koffee.magictoffee.block.entity.ModBlockEntities;
+import koffee.magictoffee.commands.ManaCommand;
 import koffee.magictoffee.commands.SpellsCommand;
 import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.components.ModComponents;
@@ -64,6 +65,7 @@ public class MagicToffee implements ModInitializer {
 
 		// Commands
 		CommandRegistrationCallback.EVENT.register(SpellsCommand::register);
+		CommandRegistrationCallback.EVENT.register(ManaCommand::register);
 
 		// Components
 		ModComponents.register();
