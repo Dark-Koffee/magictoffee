@@ -79,6 +79,7 @@ public class MagicToffee implements ModInitializer {
 					int mana = magicComponent.getMana();
 					if (mana < 100) {
 						magicComponent.setMana(mana + 1);
+						Spell_ListS2CPacket.send(player);
 					}
 				}
 			}
