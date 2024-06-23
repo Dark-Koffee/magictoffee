@@ -3,6 +3,7 @@ package koffee.magictoffee.spells;
 import koffee.magictoffee.components.ModComponents;
 import koffee.magictoffee.util.KoffeeSpellTools;
 import koffee.magictoffee.util.Particles;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -15,14 +16,41 @@ public class PushSpell extends Spell{
     public PushSpell() {
         super.spellID = "magictoffee:push";
         super.displayName = "Push";
+        super.cooldown = 10;
     }
 
     @Override
     public boolean ActionOnUse(PlayerEntity player) {
         Vec3d targetBlock = KoffeeSpellTools.getTargetBlock(player, 10, true);
+        KoffeeSpellTools.TargetEntityResult entityResult = KoffeeSpellTools.getTargetEntity(player, 10);
         Vec3d playerPos = player.getEyePos();
 
-        if (targetBlock != null) {
+        if (entityResult != null) {
+            // Get the entity the player is lookin' at
+            Entity targetEntity = entityResult.getEntity();
+
+            // Get vector between player and entity
+            Vec3d vector = targetEntity.getPos().subtract(playerPos);
+
+            // Get vector to push the entity with
+            Vec3d desiredVector = (vector.normalize()).multiply(1.5D);
+
+            // Push the entity away from ya
+            targetEntity.addVelocity(desiredVector);
+
+            // Play whoosh sound for player
+            player.playSound(SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.AMBIENT, 1.0F, 2.0F);
+
+            // Get location to draw particles at
+            Vec3d offset = vector.normalize().multiply(0.75);
+            Vec3d particlePos = (entityResult.getHitPos()).add(offset);
+
+            // Draw a line between the entity and the player
+            Particles.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0);
+
+            return true;
+        }
+        else if (targetBlock != null) {
             // Get vector between player and block
             Vec3d vector = playerPos.subtract(targetBlock);
 
