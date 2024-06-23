@@ -13,5 +13,8 @@ public interface MagicComponent extends ComponentV3 {
     long getCooldown(String spellID);
     void setCooldown(String spellID, long cooldown);
 
+    int getMana();
+    void setMana(int mana);
+
     void writeCooldownsToBuf(PacketByteBuf buf);
 }

@@ -3,6 +3,7 @@ package koffee.magictoffee;
 import koffee.magictoffee.block.ModBlocks;
 import koffee.magictoffee.block.entity.ModBlockEntities;
 import koffee.magictoffee.commands.SpellsCommand;
+import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.components.ModComponents;
 import koffee.magictoffee.enchantments.ModEnchantments;
 import koffee.magictoffee.event.WandAttackHandler;
@@ -13,8 +14,10 @@ import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
 import koffee.magictoffee.spells.ModSpells;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +27,7 @@ public class MagicToffee implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final String MOD_ID = "magictoffee";
 	public static final Logger LOGGER = LoggerFactory.getLogger("MagicToffee");
+	private int tickCounter = 0;
 
 
 	@Override
@@ -64,5 +68,20 @@ public class MagicToffee implements ModInitializer {
 
 		// Components
 		ModComponents.register();
+
+		// Timer
+		ServerTickEvents.END_SERVER_TICK.register(world -> {
+			tickCounter++;
+			if (tickCounter >= 20) {
+				tickCounter = 0;
+				for (ServerPlayerEntity player : world.getPlayerManager().getPlayerList()) {
+					MagicComponent magicComponent = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+					int mana = magicComponent.getMana();
+					if (mana < 100) {
+						magicComponent.setMana(mana + 1);
+					}
+				}
+			}
+		});
 	}
 }

@@ -19,6 +19,8 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
     }
     private final Map<String, Long> spellCooldowns = new HashMap<>();
 
+    private int mana = 100;
+
     public MagicComponentImpl(Entity entity) {
         this.entity = entity;
     }
@@ -61,6 +63,16 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
     }
 
     @Override
+    public int getMana() {
+        return mana;
+    }
+
+    @Override
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    @Override
     public void readFromNbt(NbtCompound tag) {
         // Selected Spell
         this.selected = tag.getInt("selected");
@@ -74,6 +86,8 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
         for (String key : cooldownTag.getKeys()) {
             spellCooldowns.put(key, cooldownTag.getLong(key));
         }
+        // Mana
+        this.mana = tag.getInt("mana");
     }
 
     @Override
@@ -90,6 +104,8 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
             cooldownTag.putLong(entry.getKey(), entry.getValue());
         }
         tag.put("spellCooldowns", cooldownTag);
+        // Mana
+        tag.putInt("mana", mana);
     }
 
     private void sync() {

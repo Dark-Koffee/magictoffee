@@ -38,20 +38,33 @@ public class WandAttackHandler {
                     // Gets the spell's cooldown
                     long spellCooldown = spell.getCooldown();
 
-                    if (currentTime >= lastUsed+spellCooldown) {
-                        // Cooldown is run before the action in case for some reason
-                        // you wanted to override the cooldown in your spell (e.g. in case of a failed spell)
-                        magicComponent.setCooldown(spellID, currentTime);
-                        // Run the player's selected spell's action
-                        if (spell.ActionOnUse(player)) {
+                    // Gets the player's mana
+                    int mana = magicComponent.getMana();
+
+                    // Get the spell's mana cost
+                    int manaCost = spell.getManaCost();
+
+                    if (mana >= manaCost) {
+                        if (currentTime >= lastUsed + spellCooldown) {
+                            // Cooldown is run before the action in case for some reason
+                            // you wanted to override the cooldown in your spell (e.g. in case of a failed spell)
+                            magicComponent.setCooldown(spellID, currentTime);
+                            magicComponent.setMana(mana - manaCost);
+                            player.sendMessage(Text.literal("You have " + mana + " Mana"));
+                            // Run the player's selected spell's action
+                            if (spell.ActionOnUse(player)) {
+                                Spell_ListS2CPacket.send((ServerPlayerEntity) player);
+                                // Only return success if the action returns true
+                                return TypedActionResult.success(player.getStackInHand(hand));
+                            }
                             Spell_ListS2CPacket.send((ServerPlayerEntity) player);
-                            // Only return success if the action returns true
-                            return TypedActionResult.success(player.getStackInHand(hand));
+                        } else {
+                            player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 0.5F, 1.0F);
+                            player.sendMessage(Text.literal("§cCooldown: " + String.format("%.1f", (lastUsed + spellCooldown - currentTime) / 20.0f) + " Sec"), true);
                         }
-                        Spell_ListS2CPacket.send((ServerPlayerEntity) player);
                     } else {
                         player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 0.5F, 1.0F);
-                        player.sendMessage(Text.literal("§cCooldown: " + String.format("%.1f", (lastUsed + spellCooldown - currentTime)/20.0f) + " Sec"), true);
+                        player.sendMessage(Text.literal("§cNot Enough Mana"));
                     }
                 }
             }
