@@ -7,5 +7,9 @@
 
     "itemgroup.magictoffee": "Magic Toffee",
 
-    "enchantment.magictoffee.frostbite": "Frostbite"
+    "enchantment.magictoffee.frostbite": "Frostbite",
+
+    "death.attack.magicmissile": "%1$s was struck by a rogue missile",
+
+    "death.attack.magicmissile.player": "%1$s was struck by %2$s's missile"
 }
