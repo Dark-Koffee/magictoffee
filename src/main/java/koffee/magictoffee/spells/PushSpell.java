@@ -1,5 +1,6 @@
 package koffee.magictoffee.spells;
 
+import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.components.ModComponents;
 import koffee.magictoffee.util.KoffeeSpellTools;
 import koffee.magictoffee.util.Particles;
@@ -75,7 +76,9 @@ public class PushSpell extends Spell{
             return true;
         } else {
             player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
-            ModComponents.SPELLS_COMPONENT_KEY.get(player).setCooldown(spellID, 0);
+            MagicComponent magicComponent = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+            magicComponent.setCooldown(spellID, 0);
+            magicComponent.setMana(magicComponent.getMana()+manaCost);
             return false;
         }
     }
