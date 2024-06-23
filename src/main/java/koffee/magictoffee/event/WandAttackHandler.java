@@ -50,7 +50,6 @@ public class WandAttackHandler {
                             // you wanted to override the cooldown in your spell (e.g. in case of a failed spell)
                             magicComponent.setCooldown(spellID, currentTime);
                             magicComponent.setMana(mana - manaCost);
-                            player.sendMessage(Text.literal("You have " + mana + " Mana"));
                             // Run the player's selected spell's action
                             if (spell.ActionOnUse(player)) {
                                 Spell_ListS2CPacket.send((ServerPlayerEntity) player);
@@ -64,7 +63,7 @@ public class WandAttackHandler {
                         }
                     } else {
                         player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 0.5F, 1.0F);
-                        player.sendMessage(Text.literal("§cNot Enough Mana"));
+                        player.sendMessage(Text.literal("§cNot Enough Mana"), true);
                     }
                 }
             }
