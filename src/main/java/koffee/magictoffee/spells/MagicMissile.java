@@ -2,16 +2,23 @@ package koffee.magictoffee.spells;
 
 import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.components.ModComponents;
+import koffee.magictoffee.damage.ModDamageTypes;
 import koffee.magictoffee.util.KoffeeSpellTools;
 import koffee.magictoffee.util.Particles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.Angerable;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.List;
 
 public class MagicMissile extends Spell {
 
@@ -81,14 +88,33 @@ public class MagicMissile extends Spell {
             targetEntityLoc = targetEntity.getEyePos();
             // Move line down 0.2 blocks
             targetEntityLoc = new Vec3d(targetEntityLoc.x, targetEntityLoc.y - 0.2, targetEntityLoc.z);
-//                ((LivingEntity) entity).setHealth(((LivingEntity) entity).getHealth()-1);
-            targetEntity.damage(targetEntity.getDamageSources().generic(), 2.0F);
-        }
+            //targetEntity.damage(targetEntity.getDamageSources().generic(), 2.0F);
+            targetEntity.damage(ModDamageTypes.of(world, ModDamageTypes.MAGICMISSILE, player, targetEntity), 4.0F);
+            ((LivingEntity) targetEntity).setAttacker(player);
+            if (targetEntity instanceof Angerable) {
+                ((Angerable) targetEntity).setAngryAt(player.getUuid());
+            }
+            if (targetEntity instanceof AnimalEntity) {
+                fleeFromPlayer((AnimalEntity) targetEntity, player);
+            }
+            if (targetEntity instanceof VillagerEntity) {
+                List<IronGolemEntity> ironGolems = world.getEntitiesByClass(IronGolemEntity.class,
+                        targetEntity.getBoundingBox().expand(16.0),
+                        golem -> !golem.isDead());
 
-        // pushes the target entity backwards
-        Vec3d velocity = (targetEntity.getPos()).subtract(player.getPos());
-        Vec3d desiredVelocity = (velocity.normalize()).multiply(0.5);
-        targetEntity.addVelocity(desiredVelocity.x, 0.5, desiredVelocity.z);
+                // Set the player as the target for each Iron Golem found
+                for (IronGolemEntity golem : ironGolems) {
+                    golem.setTarget(player);
+                }
+            }
+
+
+//            targetEntity.damage(new DamageSource(targetEntity.getWorld().getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(ModDamageTypes.MAGICMISSILE)), 1.0F);
+        }
+            // pushes the target entity backwards
+            Vec3d velocity = (targetEntity.getPos()).subtract(player.getPos());
+            Vec3d desiredVelocity = (velocity.normalize()).multiply(0.5);
+            targetEntity.setVelocity(desiredVelocity.x, 0.5, desiredVelocity.z);
 
         // Move line down 0.2 blocks
         eyePos = new Vec3d(eyePos.x, eyePos.y - 0.2, eyePos.z);
@@ -107,5 +133,19 @@ public class MagicMissile extends Spell {
         magicComponent.setCooldown(spellID, player.getWorld().getTime() - cooldown/2);
         magicComponent.setMana(magicComponent.getMana()+manaCost);
         return false;
+    }
+    private void fleeFromPlayer(AnimalEntity animal, PlayerEntity player) {
+        // Calculate direction away from player's position
+        Vec3d playerPos = player.getPos();
+        Vec3d entityPos = animal.getPos();
+        Vec3d fleeDirection = entityPos.subtract(playerPos).normalize();
+
+        // Adjust movement to flee in the opposite direction
+        double fleeDistance = 8.0; // Adjust as needed
+        double fleeX = animal.getX() + fleeDirection.x * fleeDistance;
+        double fleeZ = animal.getZ() + fleeDirection.z * fleeDistance;
+
+        // Set the destination to flee from the player
+        animal.getNavigation().startMovingTo(fleeX, animal.getY(), fleeZ, 1.0);
     }
 }
