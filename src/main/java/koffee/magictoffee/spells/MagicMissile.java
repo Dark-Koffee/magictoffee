@@ -23,7 +23,7 @@ import java.util.List;
 public class MagicMissile extends Spell {
 
     public MagicMissile() {
-        super.spellID = "magictoffee:magicmissile";
+        super.spellID = "magictoffee:magic_missile";
         super.displayName = "Magic Missile";
         super.cooldown = 10;
     }
