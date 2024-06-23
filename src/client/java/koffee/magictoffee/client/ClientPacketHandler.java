@@ -9,6 +9,7 @@ public class ClientPacketHandler {
     public static String[] spells = new String[5];
     public static int selectedSpell;
     public static final Map<String, Long> spellCooldowns = new HashMap<>();
+    public static int mana = 100;
     public static void register() {
         ClientPlayNetworking.registerGlobalReceiver(ModMessages.SPELL_LIST, (client, handler, buf, responseSender) -> {
             client.execute(() -> {
@@ -19,6 +20,8 @@ public class ClientPacketHandler {
                 }
                 // Register selected
                 selectedSpell = buf.readInt();
+                // Register mana
+                mana = buf.readInt();
                 // Register cooldowns
                 int size = buf.readInt(); // Read the size of the map
                 for (int i = 0; i < size; i++) {
