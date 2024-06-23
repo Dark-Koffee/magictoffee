@@ -9,26 +9,26 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 
 public class SpellsListHud implements HudRenderCallback {
 
-    private final Identifier[] textureIdentifiers = {
+    private static final Identifier[] textureIdentifiers = {
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_top_left.png"),
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_top.png"),
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_top_right.png"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_middle_left.png"),
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_middle.png"),
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_middle_right.png"),
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_bottom_left.png"),
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_bottom.png"),
-            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_bottom_right.png")
+            new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_bottom_right.png"),
     };
 
-    private final int[] textureWidths = new int[textureIdentifiers.length];
-    private final int[] textureHeights = new int[textureIdentifiers.length];
+//    private final int[] textureWidths = new int[textureIdentifiers.length];
+//    private final int[] textureHeights = new int[textureIdentifiers.length];
 
     @Override
     public void onHudRender(DrawContext drawContext, float tickDelta) {
@@ -37,11 +37,6 @@ public class SpellsListHud implements HudRenderCallback {
         assert client.player != null;
         if (WandAttackHandler.isWandInHand(client.player, Hand.MAIN_HAND)) {
             TextRenderer renderer = client.textRenderer;
-
-            // Binds all the textures
-            for (Identifier textureIdentifier : textureIdentifiers) {
-                client.getTextureManager().bindTexture(textureIdentifier);
-            }
 
             // Obtain the screen width and height
             int screenWidth = client.getWindow().getScaledWidth();
@@ -60,7 +55,7 @@ public class SpellsListHud implements HudRenderCallback {
             // Spell List
             String[] spellsList = new String[5];
 
-            // Draw all the spells
+            // Get the text and order for all the spells
             for (int i = 2; i >= -2; i--) {
                 // Calculate the spell's index, wrapping around if necessary
                 // (Adding 5 so when it's never negative)
@@ -68,17 +63,14 @@ public class SpellsListHud implements HudRenderCallback {
                 String spellID = ClientPacketHandler.spells[spellIndex];
                 Spell spell = SpellData.getSpellFromID(spellID);
 
-
-
-
                 // Gets the spell's display name including index temporarily
-                String text = spell.getDisplayName() + " " + (spellIndex + 1);
+                String text = spell.getDisplayName();// + " " + (spellIndex + 1);
 
                 // Colors the spell's name depending on whether it's selected or not
-                String prefix = "§8"; // Default Spell Color
-                String starPrefix = "§8"; // Default Star Color
+                String prefix = "§7"; // Default Spell Color
+                String starPrefix = "§7"; // Default Star Color
                 if (i == 0) {
-                    prefix = "§7"; // Selected Spell Color
+                    prefix = "§f"; // Selected Spell Color
                     starPrefix = "§f"; // Selected Star color
                 }
 
@@ -97,31 +89,82 @@ public class SpellsListHud implements HudRenderCallback {
                 spellsList[(i-2)*-1] = prefix + text;
             }
 
+            int xAlign = 4;
 
+            // Draw the GUI behind the spells
+            int defaultHeight = screenHeight - ( textHeight * 16 / 3) - textHeight - 11;
+            // Top left
+            drawContext.drawTexture(textureIdentifiers[0],
+                    screenWidth - textWidth - 25 - xAlign,
+                    defaultHeight,
+                    0, 0, 64, 64, 64, 64);
+            // Top middle
+            for (int i = 0; i < (textWidth-6)/6; i++) {
+                drawContext.drawTexture(textureIdentifiers[1],
+                        screenWidth - textWidth - 37 + 6*i - xAlign,
+                        defaultHeight,
+                        0, 0, 64, 64, 64, 64);
+            }
+            // Top right
+            drawContext.drawTexture(textureIdentifiers[2],
+                    screenWidth - textWidth - 55 + ((textWidth-6)/6)*6 - xAlign,
+                    defaultHeight,
+                    0, 0, 64, 64, 64, 64);
+//            System.out.println("Screen Width:" + (screenWidth));
+//            System.out.println("Top Right X:" + (screenWidth - textWidth + 37 -64 + ((textWidth-6)/6)*6));
+            // Middle left
+            for (int i = 0; i < (screenHeight - defaultHeight-12) / 12; i++) {
+                drawContext.drawTexture(textureIdentifiers[3],
+                        screenWidth - textWidth - 25 - xAlign,
+                        defaultHeight - 18 + 12 * i,
+                        0, 0, 64, 64, 64, 64);
+            }
+            // Middle
+            for (int i = 0; i < (screenHeight - defaultHeight-12) / 12; i++) {
+                for (int j = 0; j < (textWidth - 6) / 6; j++) {
+                    drawContext.drawTexture(textureIdentifiers[4],
+                            screenWidth - textWidth - 37 + 6 * j - xAlign,
+                            defaultHeight - 18 + 12 * i,
+                            0, 0, 64, 64, 64, 64);
+                }
+            }
+            // Middle right
+            for (int i = 0; i < (screenHeight - defaultHeight-12) / 12; i++) {
+                drawContext.drawTexture(textureIdentifiers[5],
+                        screenWidth - textWidth - 55 + ((textWidth-6)/6)*6 - xAlign,
+                        defaultHeight - 18 + 12 * i,
+                        0, 0, 64, 64, 64, 64);
+            }
+            // Bottom left
+            drawContext.drawTexture(textureIdentifiers[6],
+                    screenWidth - textWidth - 25 - xAlign,
+                    defaultHeight -59 + 12 * (((screenHeight - defaultHeight-12) / 12) + 1),
+                    0, 0, 64, 64, 64, 64);
+            // Bottom middle
+            for (int i = 0; i < (textWidth-6)/6; i++) {
+                drawContext.drawTexture(textureIdentifiers[7],
+                        screenWidth - textWidth - 37 + 6*i - xAlign,
+                        defaultHeight -59 + 12 * (((screenHeight - defaultHeight-12) / 12) + 1),
+                        0, 0, 64, 64, 64, 64);
+            }
+            // Bottom right
+            drawContext.drawTexture(textureIdentifiers[8],
+                    screenWidth - textWidth - 55 + ((textWidth-6)/6)*6 - xAlign,
+                    defaultHeight -59 + 12 * (((screenHeight - defaultHeight-12) / 12) + 1),
+                    0, 0, 64, 64, 64, 64);
+
+
+
+
+
+            // Draw all the spells
             for (int i = 0; i <= 4; i++) {
 
                 // Calculate the x and y coordinates to render the text in the bottom right corner
-                int x = screenWidth - textWidth - 5; // 5 pixels from the right edge
-                int y = screenHeight - ( textHeight * (i) * 4 / 3) - textHeight - 5; // 5 pixels from the bottom edge
+                int x = screenWidth - textWidth - 15 - xAlign; // Math
+                int y = screenHeight - ( textHeight * (i) * 4 / 3) - textHeight - 6; // More math
 
                 drawContext.drawText(renderer, spellsList[i], x, y, 0xffffff, true);
-            }
-        }
-    }
-
-    private void getTextureDimensions() {
-        MinecraftClient client = MinecraftClient.getInstance();
-
-        for (int i = 0; i < textureIdentifiers.length; i++)
-        {
-            NativeImageBackedTexture texture = (NativeImageBackedTexture) client.getTextureManager()
-                    .getTexture(textureIdentifiers[i]);
-            if (texture != null) {
-                NativeImage image = texture.getImage();
-                if (image != null) {
-                    textureWidths[i] = image.getWidth();
-                    textureHeights[i] = image.getHeight();
-                }
             }
         }
     }
