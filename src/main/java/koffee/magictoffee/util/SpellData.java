@@ -21,6 +21,14 @@ public class SpellData {
         component.setSelected(selected);
         return selected;
     }
+    public static int setSelected(PlayerEntity player, int selected) {
+        MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+        if (0 <= selected && selected <= 4) {
+            component.setSelected(selected);
+            return selected;
+        }
+        return 0;
+    }
     public static int getSelected(PlayerEntity player) {
         MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
         // Selected is set to 0 if it doesn't exist
