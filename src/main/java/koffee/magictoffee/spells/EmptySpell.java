@@ -9,6 +9,7 @@ public class EmptySpell extends Spell {
         super.displayName = "Empty Slot";
         super.cooldown = -1;
         super.manaCost = 0;
+        super.registerBook = false;
     }
 
     @Override
