@@ -19,5 +19,8 @@ public class SpellRegisterer {
         return spellNames;
     }
 
+    public void registerSpellBook(Spell spell) {
+
+    }
 }
 

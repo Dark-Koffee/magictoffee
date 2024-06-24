@@ -16,10 +16,8 @@ public class ModItemGroups {
             new Identifier(MagicToffee.MOD_ID, "magictoffee"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.magictoffee"))
                     .icon(() -> new ItemStack(ModItems.wand)).entries(((displayContext, entries) -> {
-                        // Items
+                        // Wand
                         entries.add(ModItems.wand);
-
-                        // Blocks
 
                         // Spellcaster
                         entries.add(ModBlocks.spellcaster);
