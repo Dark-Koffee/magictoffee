@@ -1,7 +1,10 @@
 package koffee.magictoffee.spells;
+import koffee.magictoffee.item.ModItems;
+import koffee.magictoffee.item.custom.SpellBook;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -16,6 +19,7 @@ public class SlowFallSpell extends Spell {
         super.bookName = this.displayName;
         super.cooldown = 40;
         super.manaCost = 10;
+        super.spellBook = SpellBook.setSpell(new ItemStack(ModItems.spellbook), this.spellID);
     }
 
     @Override

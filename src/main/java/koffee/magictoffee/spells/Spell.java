@@ -1,6 +1,9 @@
 package koffee.magictoffee.spells;
 
+import koffee.magictoffee.item.ModItems;
+import koffee.magictoffee.item.custom.SpellBook;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 
 public abstract class Spell {
     // -- Spell Class Fields --
@@ -12,6 +15,7 @@ public abstract class Spell {
     protected boolean registerBook; // in mana e.g. 10
     protected String bookName; // in mana e.g. 10
     protected String description; // in mana e.g. 10
+    protected ItemStack spellBook;
 
     // -- Spell Class Constructors --
 
@@ -25,11 +29,12 @@ public abstract class Spell {
         this.manaCost = 5;
         this.registerBook = true;
         this.description = "This is a spellbook";
+        this.spellBook = SpellBook.setSpell(new ItemStack(ModItems.spellbook), this.getID());
 
     }
 
     // Overloaded Constructor
-    public Spell(String id, String type, String display, String bookName, int cooldown, int cost, boolean registerBook, String description) {
+    public Spell(String id, String type, String display, String bookName, int cooldown, int cost, boolean registerBook, String description, ItemStack spellBook) {
         this.spellID = id;
         this.spellType = type;
         this.displayName = display;
@@ -38,6 +43,7 @@ public abstract class Spell {
         this.manaCost = cost;
         this.registerBook = registerBook;
         this.description = description;
+        this.spellBook = spellBook;
     }
 
     // -- Spell Class Functions --
@@ -79,4 +85,5 @@ public abstract class Spell {
         return this.description;
     }
 
+    public ItemStack getSpellBook() {return this.spellBook;}
 }

@@ -18,9 +18,10 @@ public class SpellBook extends Item {
     }
 
     // Method to set the spell
-    public static void setSpell(ItemStack stack, String spellID) {
+    public static ItemStack setSpell(ItemStack stack, String spellID) {
         NbtCompound nbt = stack.getOrCreateNbt();
         nbt.putString("Spell", spellID);
+        return stack;
     }
 
     // Method to get the spell

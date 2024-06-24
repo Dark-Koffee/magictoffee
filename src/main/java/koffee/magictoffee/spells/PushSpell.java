@@ -2,10 +2,13 @@ package koffee.magictoffee.spells;
 
 import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.components.ModComponents;
+import koffee.magictoffee.item.ModItems;
+import koffee.magictoffee.item.custom.SpellBook;
 import koffee.magictoffee.util.KoffeeSpellTools;
 import koffee.magictoffee.util.DrawTools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -19,6 +22,7 @@ public class PushSpell extends Spell{
         super.displayName = "Push";
         super.bookName = this.displayName;
         super.cooldown = 10;
+        super.spellBook = SpellBook.setSpell(new ItemStack(ModItems.spellbook), this.spellID);
     }
 
     @Override

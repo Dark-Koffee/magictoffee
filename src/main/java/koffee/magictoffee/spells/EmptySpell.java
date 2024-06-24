@@ -1,5 +1,6 @@
 package koffee.magictoffee.spells;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 
 public class EmptySpell extends Spell {
@@ -10,6 +11,7 @@ public class EmptySpell extends Spell {
         super.cooldown = -1;
         super.manaCost = 0;
         super.registerBook = false;
+        super.spellBook = ItemStack.EMPTY;
     }
 
     @Override

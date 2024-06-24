@@ -1,7 +1,10 @@
 package koffee.magictoffee.spells;
 
+import koffee.magictoffee.item.ModItems;
+import koffee.magictoffee.item.custom.SpellBook;
 import koffee.magictoffee.util.DrawTools;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -15,6 +18,7 @@ public class HealSpell extends Spell{
         super.displayName = "Heal";
         super.bookName = this.displayName;
         super.manaCost = 20;
+        super.spellBook = SpellBook.setSpell(new ItemStack(ModItems.spellbook), this.spellID);
     }
 
     @Override
