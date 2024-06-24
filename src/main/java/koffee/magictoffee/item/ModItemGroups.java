@@ -2,6 +2,9 @@ package koffee.magictoffee.item;
 
 import koffee.magictoffee.MagicToffee;
 import koffee.magictoffee.block.ModBlocks;
+import koffee.magictoffee.item.custom.SpellBook;
+import koffee.magictoffee.spells.Spell;
+import koffee.magictoffee.spells.SpellRegisterer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -19,9 +22,17 @@ public class ModItemGroups {
                         // Wand
                         entries.add(ModItems.wand);
 
+                        // Spells
+                        for (Spell spell : SpellRegisterer.spells) {
+                            if (spell.getRegisterBook()) {
+                                ItemStack stack = new ItemStack(ModItems.spellbook);
+                                SpellBook.setSpell(stack, spell.getID());
+                                entries.add(stack);
+                            }
+                        }
+
                         // Spellcaster
                         entries.add(ModBlocks.spellcaster);
-
 
                     })).build());
 
