@@ -9,6 +9,9 @@ public abstract class Spell {
     protected String displayName; // e.g. Magic Missile
     protected long cooldown; // in ticks e.g. 20
     protected int manaCost; // in mana e.g. 10
+    protected boolean registerBook; // in mana e.g. 10
+    protected String bookName; // in mana e.g. 10
+    protected String description; // in mana e.g. 10
 
     // -- Spell Class Constructors --
 
@@ -17,17 +20,24 @@ public abstract class Spell {
         this.spellID = "magictoffee:none";
         this.spellType = "Basic";
         this.displayName = "Unknown";
+        this.bookName = "Unknown";
         this.cooldown = 20;
         this.manaCost = 5;
+        this.registerBook = true;
+        this.description = "This is a spellbook";
+
     }
 
     // Overloaded Constructor
-    public Spell(String id, String type, String display, int cooldown, int cost) {
+    public Spell(String id, String type, String display, String bookName, int cooldown, int cost, boolean registerBook, String description) {
         this.spellID = id;
         this.spellType = type;
         this.displayName = display;
+        this.bookName = bookName;
         this.cooldown = cooldown;
         this.manaCost = cost;
+        this.registerBook = registerBook;
+        this.description = description;
     }
 
     // -- Spell Class Functions --
@@ -55,6 +65,18 @@ public abstract class Spell {
 
     public int getManaCost() {
         return this.manaCost;
+    }
+
+    public boolean getRegisterBook() {
+        return this.registerBook;
+    }
+
+    public String getBookName() {
+        return this.bookName;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
 }
