@@ -43,8 +43,8 @@ public class SpellcasterBlock extends BlockWithEntity implements BlockEntityProv
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            //player.sendMessage(Text.literal("\u00A78[\u00A77\u00A7oInsert opening of gui here\u00A78]"), false);
-            player.openHandledScreen(new SimpleNamedScreenHandlerFactory((syncId, inv, p) -> new SpellcasterScreenHandler(syncId, inv), Text.of("Spellcaster")));
+            //player.sendMessage(Text.literal("§8[§7§oInsert opening of gui here§8]"), false);
+            player.openHandledScreen(new SimpleNamedScreenHandlerFactory((syncId, inv, p) -> new SpellcasterScreenHandler(syncId, inv), Text.of("")));
         }
 
         return ActionResult.SUCCESS;
