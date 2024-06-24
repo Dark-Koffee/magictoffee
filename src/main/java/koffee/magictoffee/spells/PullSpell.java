@@ -17,6 +17,7 @@ public class PullSpell extends Spell{
     public PullSpell() {
         super.spellID = "magictoffee:pull";
         super.displayName = "Pull";
+        super.bookName = this.displayName;
         super.cooldown = 10;
     }
 

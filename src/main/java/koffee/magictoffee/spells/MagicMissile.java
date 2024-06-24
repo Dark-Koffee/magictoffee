@@ -25,6 +25,7 @@ public class MagicMissile extends Spell {
     public MagicMissile() {
         super.spellID = "magictoffee:magic_missile";
         super.displayName = "Magic Missile";
+        super.bookName = this.displayName;
         super.cooldown = 10;
     }
 

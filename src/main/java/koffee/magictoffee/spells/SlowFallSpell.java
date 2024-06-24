@@ -13,6 +13,7 @@ public class SlowFallSpell extends Spell {
     SlowFallSpell() {
         super.spellID = "magictoffee:slow_fall";
         super.displayName = "Slow Fall";
+        super.bookName = this.displayName;
         super.cooldown = 40;
         super.manaCost = 10;
     }

@@ -17,6 +17,7 @@ public class PushSpell extends Spell{
     public PushSpell() {
         super.spellID = "magictoffee:push";
         super.displayName = "Push";
+        super.bookName = this.displayName;
         super.cooldown = 10;
     }
 

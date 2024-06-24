@@ -9,8 +9,10 @@ public class TestSpell extends Spell {
     TestSpell() {
         super.spellID = "magictoffee:test";
         super.displayName = "Test Spell";
+        super.bookName = this.displayName;
         super.cooldown = 40;
         super.manaCost = 0;
+//        super.registerBook = false;
     }
 
     @Override

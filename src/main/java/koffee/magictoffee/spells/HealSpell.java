@@ -13,6 +13,7 @@ public class HealSpell extends Spell{
     public HealSpell() {
         super.spellID = "magictoffee:heal";
         super.displayName = "Heal";
+        super.bookName = this.displayName;
         super.manaCost = 20;
     }
 
