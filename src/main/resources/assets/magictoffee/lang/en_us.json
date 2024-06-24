@@ -1,12 +1,13 @@
 {
     "item.magictoffee.wand": "Wand",
-    "item.magictoffee.spellbook": "Spell Book",
+
+    "item.magictoffee.spellbook": "\u00A7eSpell Book",
+
+    "itemgroup.magictoffee": "Magic Toffee",
 
     "block.magictoffee.spellcaster": "Spellcaster",
 
     "block.magictoffee.tempblock": "Tempblock",
-
-    "itemgroup.magictoffee": "Magic Toffee",
 
     "enchantment.magictoffee.frostbite": "Frostbite",
 
