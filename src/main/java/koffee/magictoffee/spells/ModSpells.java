@@ -3,8 +3,6 @@ import koffee.magictoffee.MagicToffee;
 
 public class ModSpells {
 
-    // Test Spell
-    public static final Spell testSpell = registerSpell(new TestSpell());
     // Empty Spell
     public static final Spell emptySpell = registerSpell(new EmptySpell());
     // Magic Missile
@@ -17,6 +15,11 @@ public class ModSpells {
     public static final Spell healSpell = registerSpell(new HealSpell());
     // Slow fall
     public static final Spell slowFallSpell = registerSpell(new SlowFallSpell());
+
+    // REGISTER MORE SPELLS HERE ABOVE TEST SPELL :)
+
+    // Test Spell
+    public static final Spell testSpell = registerSpell(new TestSpell());
 
     private static Spell registerSpell(Spell spell) {
         return new SpellRegisterer().register(spell);
