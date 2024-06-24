@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 
 public class SpellsListHud implements HudRenderCallback {
 
+    // spellcaster background
     private static final Identifier[] textureIdentifiers = {
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_top_left.png"),
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_top.png"),
@@ -27,8 +28,11 @@ public class SpellsListHud implements HudRenderCallback {
             new Identifier(MagicToffee.MOD_ID, "textures/hud/hud_bottom_right.png"),
     };
 
-//    private final int[] textureWidths = new int[textureIdentifiers.length];
-//    private final int[] textureHeights = new int[textureIdentifiers.length];
+    // Mana Bar Full
+    private static final Identifier MANA_BAR_FULL = new Identifier(MagicToffee.MOD_ID, "textures/hud/mana_bar_full.png");
+
+    // Mana Bar Empty
+    private static final Identifier MANA_BAR_EMPTY = new Identifier(MagicToffee.MOD_ID, "textures/hud/mana_bar_empty.png");
 
     @Override
     public void onHudRender(DrawContext drawContext, float tickDelta) {
@@ -158,7 +162,17 @@ public class SpellsListHud implements HudRenderCallback {
             String manaText = "§9Mana: §b" + (ClientPacketHandler.mana);
             drawContext.drawText(renderer, manaText, (screenWidth-(textWidth + 25 + xAlign)) + ((textWidth + 25 + xAlign) / 2) - (renderer.getWidth(manaText) / 2), defaultHeight-textHeight-4, 0xffffff, true);
 
+            // Display mana bar full
+            drawContext.drawTexture(MANA_BAR_FULL,
+                    screenWidth - textWidth - 25 - 15 - 5 - xAlign,
+                    defaultHeight + 1,
+                    0, 0, 64, 64, 64, 64);
 
+            // Display mana bar empty
+            drawContext.drawTexture(MANA_BAR_EMPTY,
+                    screenWidth - textWidth - 25 - 15 - 5 - xAlign,
+                    defaultHeight + 1,
+                    0, 0, 64, Math.min((59 -((int) (59F * (((float) ClientPacketHandler.mana) / 100F)))) + 4, 64), 64, 64);
 
             // Draw all the spells
             for (int i = 0; i <= 4; i++) {
