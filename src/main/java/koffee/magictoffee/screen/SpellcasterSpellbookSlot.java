@@ -28,6 +28,11 @@ public class SpellcasterSpellbookSlot extends Slot {
         super.setStack(stack);
         updateSpellData(stack);
     }
+    @Override
+    public void onQuickTransfer(ItemStack newItem, ItemStack original) {
+        super.setStack(newItem, original);
+        updateSpellData(newItem);
+    }
 
     @Override
     public void onTakeItem(PlayerEntity player, ItemStack stack) {
