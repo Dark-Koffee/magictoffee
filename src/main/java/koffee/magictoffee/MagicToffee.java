@@ -21,10 +21,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -43,10 +41,9 @@ public class MagicToffee implements ModInitializer {
 	public static final ScreenHandlerType<SpellcasterScreenHandler> SPELLCASTER_SCREEN_HANDLER_SCREEN_HANDLER_TYPE;
 
 	// Particles
-	public static final RegistryKey<ParticleType<?>> HEART_KEY = RegistryKey.of(Registries.PARTICLE_TYPE.getKey(), new Identifier(MOD_ID, "heart"));
 	public static final DefaultParticleType HEART = FabricParticleTypes.simple();
 
-
+	// Spellcaster Screen Handler
 	static {
 		SPELLCASTER_SCREEN_HANDLER_SCREEN_HANDLER_TYPE = ScreenHandlerRegistry.registerSimple(
 				new Identifier(MOD_ID, "spellcaster"), SpellcasterScreenHandler::new
@@ -81,8 +78,7 @@ public class MagicToffee implements ModInitializer {
 		ModEnchantments.registerModEnchantments();
 
 		// Particles
-//		Registry.register(Registries.PARTICLE_TYPE, new Identifier(MOD_ID, "heart"), HEART);
-		Registry.register(Registries.PARTICLE_TYPE, HEART_KEY.getValue(), HEART);
+		Registry.register(Registries.PARTICLE_TYPE, new Identifier(MOD_ID, "heart"), HEART);
 
 		// Register the event listener for player join
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
