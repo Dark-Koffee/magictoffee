@@ -39,8 +39,8 @@ public class SpellcasterScreenHandler extends ScreenHandler {
         }
 
         // Add player inventory slots
-        addPlayerInventory(playerInventory, 28);
-        addPlayerHotbar(playerInventory, 28);
+        addPlayerInventory(playerInventory);
+        addPlayerHotbar(playerInventory);
 
     }
     @Override
@@ -52,7 +52,7 @@ public class SpellcasterScreenHandler extends ScreenHandler {
         // 38-46 hotbar
 
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot2 = (Slot)this.slots.get(slot); // Gets the clicked slot
+        Slot slot2 = this.slots.get(slot); // Gets the clicked slot
 
         if (slot2 != null && slot2.hasStack()) { // I'm aware intellij claims slot2 will never be null, leave it
 
@@ -139,17 +139,17 @@ public class SpellcasterScreenHandler extends ScreenHandler {
 
     }
 
-    private void addPlayerInventory(PlayerInventory playerInventory, int offsetY) {
+    private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18 + offsetY));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 114 + i * 18));
             }
         }
     }
 
-    private void addPlayerHotbar(PlayerInventory playerInventory, int offsetY) {
+    private void addPlayerHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144 + offsetY));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 172));
         }
     }
 }
