@@ -66,7 +66,6 @@ public class DrawTools {
     private static Vec3d rotateAroundAxis(Vec3d vec, Vec3d axis, double angle) {
         double cos = Math.cos(angle);
         double sin = Math.sin(angle);
-        double dot = vec.dotProduct(axis);
         double x = (cos + (1 - cos) * axis.x * axis.x) * vec.x +
                 ((1 - cos) * axis.x * axis.y - axis.z * sin) * vec.y +
                 ((1 - cos) * axis.x * axis.z + axis.y * sin) * vec.z;
