@@ -160,7 +160,10 @@ public class SpellsListHud implements HudRenderCallback {
 
             // Display mana
             String manaText = "§9Mana: §b" + (ClientPacketHandler.mana);
-            drawContext.drawText(renderer, manaText, (screenWidth-(textWidth + 25 + xAlign)) + ((textWidth + 25 + xAlign) / 2) - (renderer.getWidth(manaText) / 2), defaultHeight-textHeight-4, 0xffffff, true);
+            drawContext.drawText(renderer, manaText,
+                    (screenWidth-(textWidth + 25 + xAlign)) + ((textWidth + 25 + xAlign) / 2) - (renderer.getWidth(manaText) / 2),
+                    defaultHeight-textHeight-4,
+                    0xffffff, true);
 
             // Display mana bar full
             drawContext.drawTexture(MANA_BAR_FULL,
@@ -172,7 +175,10 @@ public class SpellsListHud implements HudRenderCallback {
             drawContext.drawTexture(MANA_BAR_EMPTY,
                     screenWidth - textWidth - 25 - 15 - 5 - xAlign,
                     defaultHeight + 1,
-                    0, 0, 64, Math.min((59 -((int) (59F * (((float) ClientPacketHandler.mana) / 100F)))) + 4, 64), 64, 64);
+                    0, 0,
+                    64,
+                    Math.min((55 -((int) (55F * (((float) ClientPacketHandler.mana) / ClientPacketHandler.manaCap)))) + 4, 64),
+                    64, 64);
 
             // Draw all the spells
             for (int i = 0; i <= 4; i++) {
