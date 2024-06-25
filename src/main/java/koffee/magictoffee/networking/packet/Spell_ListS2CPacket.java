@@ -23,6 +23,8 @@ public class Spell_ListS2CPacket {
         MagicComponent magicComponent = ModComponents.SPELLS_COMPONENT_KEY.get(player);
         // Write player's mana
         buf.writeInt(magicComponent.getMana());
+        // Write player's manaCap
+        buf.writeInt(magicComponent.getManaCap());
         // Write spell cooldowns
         magicComponent.writeCooldownsToBuf(buf);
         // Send the packet
