@@ -24,7 +24,7 @@ public class DrawTools {
     }
 
     // Draws a circle of particles around a point
-    public static void drawCircle(ServerWorld world, Vec3d center, double radius, double yaw, double pitch, int step, ParticleEffect particle, double particleSpeed) {
+    public static void drawCircle(ServerWorld world, Vec3d center, double radius, double yaw, double pitch, int step, ParticleEffect particle, double particleSpeed, int particleCount) {
         if (!world.isClient) {
             // Reference vector from yaw + 90 and pitch 0
             Vec3d reference = new Vec3d(Math.cos(Math.toRadians(yaw + 90)), 0, Math.sin(Math.toRadians(yaw + 90)));
@@ -53,7 +53,7 @@ public class DrawTools {
                         point.x,
                         point.y,
                         point.z,
-                        10,      // Number of particles
+                        particleCount,      // Number of particles
                         0.0,     // X offset
                         0.0,     // Y offset
                         0.0,     // Z offset

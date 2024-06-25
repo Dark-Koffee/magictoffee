@@ -1,11 +1,11 @@
 package koffee.magictoffee.spells;
 
+import koffee.magictoffee.MagicToffee;
 import koffee.magictoffee.item.ModItems;
 import koffee.magictoffee.item.custom.SpellBook;
 import koffee.magictoffee.util.DrawTools;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -29,8 +29,7 @@ public class HealSpell extends Spell{
 
         // Draw a ring of hearts around the player
         Vec3d loc = player.getPos();
-//        Particles.drawCircle((ServerWorld) player.getWorld(), new Vec3d(loc.getX(), loc.getY()+1, loc.getZ()), 1F, 0F, 0F, 24, MagicToffee.HEART, 1);
-        DrawTools.drawCircle((ServerWorld) player.getWorld(), new Vec3d(loc.getX(), loc.getY()+1, loc.getZ()), 1F, 0F, 0F, 24, ParticleTypes.HEART, 1);
+        DrawTools.drawCircle((ServerWorld) player.getWorld(), new Vec3d(loc.getX(), loc.getY()+1, loc.getZ()), 1F, 0F, 0F, 24, MagicToffee.HEART, 1, 1);
 
         // Heal and feed the player
         player.heal(4);

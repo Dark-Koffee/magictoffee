@@ -59,7 +59,7 @@ public class MagicMissile extends Spell {
 
         // If it doesn't hit anything
         if (targetEntity == null && targetBlock == null) {
-            DrawTools.drawCircle(world, eyePos, 0.5, 0, 0, 32, ParticleTypes.INSTANT_EFFECT, 0);
+            DrawTools.drawCircle(world, eyePos, 0.5, 0, 0, 32, ParticleTypes.INSTANT_EFFECT, 0, 10);
             player.playSound(SoundEvents.ENCHANT_THORNS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F);
             MagicComponent magicComponent = ModComponents.SPELLS_COMPONENT_KEY.get(player);
             magicComponent.setCooldown(spellID, player.getWorld().getTime() - cooldown/2);

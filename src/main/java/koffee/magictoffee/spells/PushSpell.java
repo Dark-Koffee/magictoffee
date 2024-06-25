@@ -51,8 +51,8 @@ public class PushSpell extends Spell{
             Vec3d offset = vector.normalize().multiply(0.75);
             Vec3d particlePos = (entityResult.getHitPos()).add(offset);
 
-            // Draw a line between the entity and the player
-            DrawTools.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0);
+            // Draw a circle at the block the player's looking at
+            DrawTools.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0, 5);
 
             return true;
         }
@@ -74,7 +74,7 @@ public class PushSpell extends Spell{
             player.playSound(SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.AMBIENT, 1.0F, 2.0F);
 
             // Draw the circle
-            DrawTools.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0);
+            DrawTools.drawCircle((ServerWorld) player.getWorld(), particlePos, 0.75D, player.headYaw-90, player.getPitch()-90, 16, ParticleTypes.INSTANT_EFFECT, 0.0, 5);
 
             // Update on the client
             player.velocityModified = true;
