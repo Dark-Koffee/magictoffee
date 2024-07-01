@@ -159,7 +159,7 @@ public class SpellsListHud implements HudRenderCallback {
 
 
             // Display mana
-            String manaText = "§9Mana: §b" + (ClientPacketHandler.mana);
+            String manaText = "§9Mana: §b" + (ClientPacketHandler.mana) + "/" + (ClientPacketHandler.manaCap);
             drawContext.drawText(renderer, manaText,
                     (screenWidth-(textWidth + 25 + xAlign)) + ((textWidth + 25 + xAlign) / 2) - (renderer.getWidth(manaText) / 2),
                     defaultHeight-textHeight-4,
