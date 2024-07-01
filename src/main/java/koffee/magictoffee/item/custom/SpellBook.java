@@ -1,6 +1,7 @@
 package koffee.magictoffee.item.custom;
 
 import koffee.magictoffee.spells.Spell;
+import koffee.magictoffee.util.KoffeeStringTools;
 import koffee.magictoffee.util.SpellData;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,10 +44,18 @@ public class SpellBook extends Item {
         if (spellID != null) {
             spell = SpellData.getSpellFromID(spellID);
         }
+        // Add Spell Name to tooltip
         tooltip.add(Text.literal("§7" + spell.getBookName()));
-        tooltip.add(Text.literal("§8" + spell.getDescription()));
+        // Break up into lines of 24
+        for (String line : KoffeeStringTools.splitIntoLines(spell.getDescription(), 24)) {
+            // Add Broken Up Description to Tooltip
+            tooltip.add(Text.literal("§8" + line));
+        }
+        // Add Cooldown to Tooltip
+        tooltip.add(Text.literal("§9Cooldown: §9" + String.format("%.1f", (float) spell.getCooldown()/20F) + " sec"));
+        // Add Mana Cost to Tooltip
         tooltip.add(Text.literal("§9Mana Cost: " + spell.getManaCost()));
-        tooltip.add(Text.literal("§9Cooldown: §9" + String.format("%.1f", (float) spell.getCooldown()/20F) + " seconds"));
+        // Add the Tooltip to the item with the super method
         super.appendTooltip(stack, world, tooltip, context);
     }
 }
