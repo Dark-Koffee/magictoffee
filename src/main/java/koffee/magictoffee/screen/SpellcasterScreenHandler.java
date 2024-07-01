@@ -1,6 +1,7 @@
 package koffee.magictoffee.screen;
 
 import koffee.magictoffee.MagicToffee;
+import koffee.magictoffee.item.ModItems;
 import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
 import koffee.magictoffee.util.SpellData;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,11 +30,25 @@ public class SpellcasterScreenHandler extends ScreenHandler {
             Spell_ListS2CPacket.send(((ServerPlayerEntity) player));
         }
 
-        // Mana Flask slots -- Don't actually do anything yet...
+        // Mana Flask slots
+        int manaCap = SpellData.getManaCap(player)-100;
+        int manaRegen = SpellData.getManaRegen(player)-1;
         int h = 0;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
-                this.addSlot(new SpellcasterManaFlaskSlot(customInventory, 5+h, 116 + (j*18), 8+(i*18)));
+                if (manaCap > 0) {
+                    manaCap -= 25;
+                    ItemStack item = ModItems.mana_expander.getDefaultStack();
+                    item.setCount(1);
+                    customInventory.setStack(5+h, item);
+                }
+                else if (manaRegen > 0) {
+                    manaRegen--;
+                    ItemStack item = ModItems.mana_catalyst.getDefaultStack();
+                    item.setCount(1);
+                    customInventory.setStack(5+h, item);
+                }
+                this.addSlot(new SpellcasterManaFlaskSlot(customInventory, 5+h, 116 + (j*18), 8+(i*18), player));
                 h++;
             }
         }
@@ -70,7 +85,12 @@ public class SpellcasterScreenHandler extends ScreenHandler {
             }
             // If the slot is a mana bottle slot
             else if (slot >= 5 && slot <= 10) {
-                return ItemStack.EMPTY; // Return empty for the time being
+                // Try to move it to the player's inventory
+                if (!this.insertItem(itemStack2, 11, 47, true)) {
+                    // If it fails, return empty
+                    return ItemStack.EMPTY;
+                }
+                slot2.onQuickTransfer(itemStack2, itemStack);
             }
             // If it's an Inventory / Hotbar slot
             else {
@@ -82,9 +102,8 @@ public class SpellcasterScreenHandler extends ScreenHandler {
                         return ItemStack.EMPTY;
                     }
                 }
-                // If it's a mana bottle - Clearly doesn't work yet or check for
-                // the right thing, because mana bottles don't exist yet -_-
-                else if (SpellcasterSpellbookSlot.isSpellbook(itemStack2)) {
+                // If it's a mana bottle
+                else if (SpellcasterManaFlaskSlot.isManaModifier(itemStack2)) {
                     // Try to move it to the mana slots
                     if (!this.insertItem(itemStack2, 5, 11, false)) {
                         // If it fails, return
