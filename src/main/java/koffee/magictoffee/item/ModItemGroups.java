@@ -18,8 +18,23 @@ public class ModItemGroups {
             new Identifier(MagicToffee.MOD_ID, "magictoffee"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.magictoffee"))
                     .icon(() -> new ItemStack(ModItems.wand)).entries(((displayContext, entries) -> {
+                        // Spellcaster
+                        entries.add(ModBlocks.spellcaster);
+
                         // Wand
                         entries.add(ModItems.wand);
+
+                        // Mana Expander
+                        entries.add(ModItems.mana_expander);
+
+                        // Mana Catalyst
+                        entries.add(ModItems.mana_catalyst);
+
+                        // Empty Flask
+                        entries.add(ModItems.glass_flask);
+
+                        // Mana Flask
+                        entries.add(ModItems.mana_flask);
 
                         // Spells
                         for (Spell spell : SpellRegisterer.spells) {
@@ -29,9 +44,6 @@ public class ModItemGroups {
                                 entries.add(stack);
                             }
                         }
-
-                        // Spellcaster
-                        entries.add(ModBlocks.spellcaster);
 
                     })).build());
 
