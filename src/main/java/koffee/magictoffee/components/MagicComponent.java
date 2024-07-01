@@ -19,5 +19,8 @@ public interface MagicComponent extends ComponentV3 {
     int getManaCap();
     void setManaCap(int manaCap);
 
+    int getManaRegen();
+    void setManaRegen(int manaCap);
+
     void writeCooldownsToBuf(PacketByteBuf buf);
 }

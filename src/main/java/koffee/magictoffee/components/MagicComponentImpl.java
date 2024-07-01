@@ -21,6 +21,7 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
 
     private int mana = 100;
     private int manaCap = 100;
+    private int manaRegen = 1;
 
     public MagicComponentImpl(Entity entity) {
         this.entity = entity;
@@ -84,6 +85,16 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
     }
 
     @Override
+    public int getManaRegen() {
+        return manaRegen;
+    }
+
+    @Override
+    public void setManaRegen(int manaRegen) {
+        this.manaRegen = manaRegen;
+    }
+
+    @Override
     public void readFromNbt(NbtCompound tag) {
         // Selected Spell
         this.selected = tag.getInt("selected");
@@ -100,7 +111,9 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
         // Mana
         this.mana = tag.getInt("mana");
         // ManaCap
-        this.mana = tag.getInt("manaCap");
+        this.manaCap = tag.getInt("manaCap");
+        // ManaRegen
+        this.manaRegen = tag.getInt("manaRegen");
     }
 
     @Override
@@ -120,7 +133,9 @@ public class MagicComponentImpl implements MagicComponent, AutoSyncedComponent {
         // Mana
         tag.putInt("mana", mana);
         // ManaCap
-        tag.putInt("manaCap", mana);
+        tag.putInt("manaCap", manaCap);
+        // ManaRegen
+        tag.putInt("manaRegen", manaRegen);
     }
 
     private void sync() {
