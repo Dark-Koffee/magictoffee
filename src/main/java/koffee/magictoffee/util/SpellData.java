@@ -1,10 +1,12 @@
 package koffee.magictoffee.util;
+import koffee.magictoffee.MagicToffee;
 import koffee.magictoffee.components.MagicComponent;
 import koffee.magictoffee.components.ModComponents;
 import koffee.magictoffee.spells.ModSpells;
 import koffee.magictoffee.spells.Spell;
 import koffee.magictoffee.spells.SpellRegisterer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class SpellData {
     public static int addSelected(PlayerEntity player, int amount) {
@@ -44,6 +46,37 @@ public class SpellData {
 
         // Update the spell slot in NBT with the new spell name
         component.setSpell(spellIndex, spellName);
+    }
+    public static int getMana(PlayerEntity player) {
+        MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+        return component.getMana();
+    }
+
+    public static int setMana(PlayerEntity player, int mana) {
+        MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+        component.setMana(mana);
+        return mana;
+    }
+
+    public static int setManaRegen(PlayerEntity player, int manaRegen) {
+        MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+        component.setManaRegen(manaRegen);
+        if (!player.getWorld().isClient()) { MagicToffee.refreshManaRegenTask(((ServerPlayerEntity) player)); }
+        return manaRegen;
+    }
+    public static int getManaRegen(PlayerEntity player) {
+        MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+        return component.getManaRegen();
+    }
+
+    public static int setManaCap(PlayerEntity player, int manaCap) {
+        MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+        component.setManaCap(manaCap);
+        return manaCap;
+    }
+    public static int getManaCap(PlayerEntity player) {
+        MagicComponent component = ModComponents.SPELLS_COMPONENT_KEY.get(player);
+        return component.getManaCap();
     }
 
     public static String getSpell(PlayerEntity player, int spellIndex) {
