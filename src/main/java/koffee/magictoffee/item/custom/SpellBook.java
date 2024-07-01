@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,5 +58,10 @@ public class SpellBook extends Item {
         tooltip.add(Text.literal("§9Mana Cost: " + spell.getManaCost()));
         // Add the Tooltip to the item with the super method
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public Text getName(ItemStack stack) {
+        return Text.translatable(this.getTranslationKey(stack)).formatted(Formatting.YELLOW);
     }
 }
