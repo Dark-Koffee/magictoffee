@@ -1,11 +1,9 @@
 package koffee.magictoffee.item.custom;
 
-import koffee.magictoffee.spells.Spell;
-import koffee.magictoffee.util.SpellData;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,5 +20,10 @@ public class WandItem extends Item {
         tooltip.add(Text.literal("§7Right click to cast"));
         tooltip.add(Text.literal("§7Left click to cycle"));
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public Text getName(ItemStack stack) {
+        return Text.translatable(this.getTranslationKey(stack)).formatted(Formatting.LIGHT_PURPLE);
     }
 }
