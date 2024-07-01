@@ -8,6 +8,7 @@ public class EmptySpell extends Spell {
     EmptySpell() {
         super.spellID = "magictoffee:empty";
         super.displayName = "Empty Slot";
+        super.description = "A spell-less slot";
         super.cooldown = -1;
         super.manaCost = 0;
         super.registerBook = false;

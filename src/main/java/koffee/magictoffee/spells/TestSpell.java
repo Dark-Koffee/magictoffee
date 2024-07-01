@@ -12,6 +12,7 @@ public class TestSpell extends Spell {
     TestSpell() {
         super.spellID = "magictoffee:test";
         super.displayName = "Test Spell";
+        super.description = "The first spell we made in order to test spells and give us information";
         super.bookName = this.displayName;
         super.cooldown = 40;
         super.manaCost = 0;

@@ -28,6 +28,7 @@ public class MagicMissile extends Spell {
     public MagicMissile() {
         super.spellID = "magictoffee:magic_missile";
         super.displayName = "Magic Missile";
+        super.description = "Shoots a ray of magic damaging and knocking away your target";
         super.bookName = this.displayName;
         super.cooldown = 10;
         super.spellBook = SpellBook.setSpell(new ItemStack(ModItems.spellbook), this.spellID);

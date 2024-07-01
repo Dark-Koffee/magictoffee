@@ -20,6 +20,7 @@ public class PullSpell extends Spell{
     public PullSpell() {
         super.spellID = "magictoffee:pull";
         super.displayName = "Pull";
+        super.description = "Pulls a target towards you or you towards blocks";
         super.bookName = this.displayName;
         super.cooldown = 10;
         super.spellBook = SpellBook.setSpell(new ItemStack(ModItems.spellbook), this.spellID);

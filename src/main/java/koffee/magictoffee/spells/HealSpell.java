@@ -16,6 +16,7 @@ public class HealSpell extends Spell{
     public HealSpell() {
         super.spellID = "magictoffee:heal";
         super.displayName = "Heal";
+        super.description = "Feed and Heal yourself by two hearts";
         super.bookName = this.displayName;
         super.manaCost = 20;
         super.spellBook = SpellBook.setSpell(new ItemStack(ModItems.spellbook), this.spellID);
