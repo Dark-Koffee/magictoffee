@@ -1,7 +1,6 @@
 package koffee.magictoffee.screen;
 
 import koffee.magictoffee.item.ModItems;
-import koffee.magictoffee.item.custom.SpellBook;
 import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
 import koffee.magictoffee.util.SpellData;
 import net.minecraft.entity.player.PlayerEntity;

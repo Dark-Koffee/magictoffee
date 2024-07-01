@@ -41,7 +41,6 @@ public class MagicToffee implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final String MOD_ID = "magictoffee";
 	public static final Logger LOGGER = LoggerFactory.getLogger("MagicToffee");
-	private int tickCounter = 0;
 
 	// Screen Handler (Spellcaster GUI)
 	public static final ScreenHandlerType<SpellcasterScreenHandler> SPELLCASTER_SCREEN_HANDLER_SCREEN_HANDLER_TYPE;
@@ -57,7 +56,6 @@ public class MagicToffee implements ModInitializer {
 	}
 
 	// manaRegen variables
-	private static final int TICKS_PER_SECOND = 20;
 	private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	private static final Map<ServerPlayerEntity, ScheduledFuture<?>> playerTasks = new HashMap<>();
 
