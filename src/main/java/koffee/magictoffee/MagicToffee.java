@@ -10,6 +10,7 @@ import koffee.magictoffee.enchantments.ModEnchantments;
 import koffee.magictoffee.event.WandAttackHandler;
 import koffee.magictoffee.item.ModItemGroups;
 import koffee.magictoffee.item.ModItems;
+import koffee.magictoffee.listeners.PlayerDeathListener;
 import koffee.magictoffee.networking.ModMessages;
 import koffee.magictoffee.networking.packet.Spell_ListS2CPacket;
 import koffee.magictoffee.screen.SpellcasterScreenHandler;
@@ -95,6 +96,10 @@ public class MagicToffee implements ModInitializer {
 
 		// Components
 		ModComponents.register();
+
+
+		// Register the player death event listener
+		PlayerDeathListener.register();
 
 		// Register the event listener for player join
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
