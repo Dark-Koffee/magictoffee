@@ -30,6 +30,12 @@ public class ModItemGroups {
                         // Mana Catalyst
                         entries.add(ModItems.mana_catalyst);
 
+                        // Mana Flower
+                        entries.add(ModBlocks.mana_flower);
+
+                        // Mana Petal
+                        entries.add(ModItems.mana_petal);
+
                         // Empty Flask
                         entries.add(ModItems.glass_flask);
 

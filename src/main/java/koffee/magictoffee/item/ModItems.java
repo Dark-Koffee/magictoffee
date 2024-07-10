@@ -20,6 +20,8 @@ public class ModItems {
 
     public static final Item mana_catalyst = registerItem("mana_catalyst", new ManaModifier(new FabricItemSettings().maxCount(1)));
 
+    public static final Item mana_petal = registerItem("mana_petal", new Item(new FabricItemSettings()));
+
     public static final Item mana_flask = registerItem("mana_flask", new ManaFlaskItem(new FabricItemSettings().maxCount(1)));
 
     public static final Item glass_flask = registerItem("glass_flask", new Item(new FabricItemSettings()));

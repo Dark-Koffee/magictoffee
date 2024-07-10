@@ -16,8 +16,12 @@ import net.minecraft.client.render.RenderLayer;
 public class MagicToffeeClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
+
+		// Register render map for Spellcaster
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.spellcaster, RenderLayer.getCutout());
+		// Register render map for Mana Flower
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.mana_flower, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.potted_mana_flower, RenderLayer.getCutout());
 
 		LeftClickHandler.register();
 

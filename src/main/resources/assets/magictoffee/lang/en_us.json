@@ -1,25 +1,19 @@
 {
     "item.magictoffee.wand": "Wand",
-
     "item.magictoffee.mana_expander": "Mana Expander",
-
     "item.magictoffee.mana_catalyst": "Mana Catalyst",
-
     "item.magictoffee.glass_flask": "Glass Flask",
-
     "item.magictoffee.mana_flask": "Mana Flask",
-
     "item.magictoffee.spellbook": "Spell Book",
+    "item.magictoffee.mana_petal": "Mana Petal",
 
     "itemgroup.magictoffee": "Magic Toffee",
 
     "block.magictoffee.spellcaster": "Spellcaster",
-
-    "block.magictoffee.tempblock": "Tempblock",
+    "block.magictoffee.mana_flower": "Mana Flower",
 
     "enchantment.magictoffee.frostbite": "Frostbite",
 
     "death.attack.magicmissile": "%1$s was struck by a rogue missile",
-
     "death.attack.magicmissile.player": "%1$s was struck by %2$s's missile"
 }
