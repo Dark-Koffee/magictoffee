@@ -39,6 +39,9 @@ public class SpellsListHud implements HudRenderCallback {
         MinecraftClient client = MinecraftClient.getInstance();
 
         assert client.player != null;
+        if (client.options.hudHidden) {
+            return; // Do not render if the HUD is hidden
+        }
         if (WandAttackHandler.isWandInHand(client.player, Hand.MAIN_HAND)) {
             TextRenderer renderer = client.textRenderer;
 
