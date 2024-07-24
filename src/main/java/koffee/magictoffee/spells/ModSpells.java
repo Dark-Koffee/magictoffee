@@ -15,6 +15,9 @@ public class ModSpells {
     public static final Spell healSpell = registerSpell(new HealSpell());
     // Slow fall
     public static final Spell slowFallSpell = registerSpell(new SlowFallSpell());
+    // Mana Shield
+    public static final Spell manaShield = registerSpell(new ManaShield());
+    public static final Spell manaShieldEnable = registerSpell(new ManaShieldEnabled());
 
     // REGISTER MORE SPELLS HERE ABOVE TEST SPELL :)
 
