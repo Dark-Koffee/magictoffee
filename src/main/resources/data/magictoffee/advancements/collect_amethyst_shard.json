@@ -1,0 +1,19 @@
+{
+    "criteria": {
+        "collect_amethyst_shard": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "minecraft:amethyst_shard"
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "magictoffee:wand"
+        ]
+    }
+}
